@@ -1,0 +1,19 @@
+.col-md-auto{
+    background: rgba(0, 0, 0, .5);
+}
+.label-create{
+    color: white;
+    font-size: 20px;
+    
+
+}
+/*
+input{
+  font-size: 150px;
+}
+*/
+.input-warning{
+    border-color: red;
+    color: red;
+    background-color: red;
+}
