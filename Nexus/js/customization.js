@@ -29,7 +29,7 @@
  var roller = new fabric.Rect({
    id: "cloth",
    width: 400,
-   height: 290,
+   height: 260,
    top: 40,
    lockMovementX: true,
    lockMovementY: true,
@@ -46,6 +46,7 @@
  var fabricType = "../images/fabric-1.jpg";
  var translucent = "../images/tanslucent.jpg";
  var overlayImage = "../images/templateImages/edited.png";
+ var backgroundImage = '../images/background3.jpg';
  var summary = {
    blinds: "",
    fabric: "",
@@ -118,7 +119,18 @@
        scaleY: 1,
      });
 
-   canvas.setBackgroundImage('../images/background.jpg', canvas.renderAll.bind(canvas));
+   canvas.setBackgroundImage(backgroundImage, canvas.renderAll.bind(canvas));
+
+
+   fabric.Canvas.prototype.fxAdd = function (object, callback) {
+     object.setOpacity(0);
+     this.add(object);
+     object.animate('opacity', '1', {
+       duration: 300,
+       onChange: this.renderAll.bind(this),
+       onComplete: this.setActiveObject(object)
+     });
+   };
 
    //  END OF CANVAS PROPERTIES
 
@@ -296,17 +308,18 @@
      });
      $("#btnSetting").toggleClass("invisible");
    }
-
+// NOTE INSERT OBJECT
    $("#btnText").click(function () {
      var text = new fabric.Textbox("text", {
        id: "textbox",
        fontFamily: "Handlee",
        width: 200,
+       top: 30,
        textAlign: 'center',
        objectCaching: false
      });
-     canvas.centerObject(text);
-     canvas.add(text).setActiveObject(text);
+//     canvas.centerObject(text);
+     canvas.fxAdd(text);
      canvas.renderAll();
      sendClothToBack();
 
@@ -315,11 +328,12 @@
      var circle = new fabric.Circle({
        id: "circle",
        radius: 40,
+       top: 40,
        //      fill: color[getRandomInt(0, colorEnd)],
        perPixelTargetFind: true,
        //       opacity: 0.8,
-       originX: 'center',
-       originY: 'center',
+//       originX: 'center',
+//       originY: 'center',
        objectCaching: false,
        //      clipName: 'objectOutside',
        //      clipTo: function (ctx) {
@@ -327,8 +341,8 @@
        //      }
 
      });
-     canvas.centerObject(circle);
-     canvas.add(circle).setActiveObject(circle);
+//     canvas.centerObjectH(circle);
+     canvas.fxAdd(circle);
      loadPattern(fabricType, circle, color[getRandomInt(0, colorEnd)]);
      sendClothToBack();
 
@@ -338,16 +352,18 @@
      //    var sqSize = getRandomInt(70, 200);
      var rectangle = new fabric.Rect({
        id: "rect",
-       width: 150,
-       height: 150,
+       width: 70,
+       height: 70,
+       top: 60,
+       left: 200,
        fill: color[getRandomInt(0, colorEnd)],
        perPixelTargetFind: true,
        //       opacity: 0.8,
        objectCaching: false,
 
      });
-     canvas.centerObject(rectangle);
-     canvas.add(rectangle).setActiveObject(rectangle);
+//     canvas.centerObject(rectangle);
+     canvas.fxAdd(rectangle);
      loadPattern(fabricType, rectangle, color[getRandomInt(0, colorEnd)]);
      sendClothToBack();
    });
@@ -357,11 +373,12 @@
        strokeWidth: getRandomInt(3, 10),
        stroke: color[getRandomInt(0, colorEnd)],
        perPixelTargetFind: true,
+       top: 30,
        //       opacity: 0.8,
        objectCaching: false
      });
-     canvas.centerObject(line);
-     canvas.add(line).setActiveObject(line);
+//     canvas.centerObject(line);
+     canvas.fxAdd(line);
      canvas.renderAll();
      sendClothToBack();
 
@@ -369,13 +386,14 @@
    $("#btnTriangle").click(function () {
      var triangle = new fabric.Triangle({
        id: "triangle",
+       top: 30,
        fill: color[getRandomInt(0, colorEnd)],
        perPixelTargetFind: true,
        //       opacity: 0.8,
        objectCaching: false
      });
-     canvas.centerObject(triangle);
-     canvas.add(triangle).setActiveObject(triangle);
+     canvas.centerObjectH(triangle);
+     canvas.fxAdd(triangle);
      canvas.renderAll();
      sendClothToBack();
 
@@ -477,10 +495,8 @@
            onChange: canvas.renderAll.bind(canvas),
            easing: fabric.util.ease.easeInBack,
            onComplete: function () {
-
              canvas.remove(object)
              canvas.discardActiveGroup();
-
              //          $("#undo").parent().removeClass('invisible');
            }
          });
@@ -510,7 +526,7 @@
    });
    $("#undo").click(function () {
      _clipboard.clone(function (clonedObj) {
-       canvas.add(clonedObj);
+       canvas.fxAdd(clonedObj);
        canvas.renderAll();
        $("#undo").parent().addClass('invisible');
        clonedObj.animate({
@@ -674,7 +690,7 @@
 
 
  }); // END OF DOCUMENT READY
-
+// NOTE INSERT IMAGE
  function insertImageToCanvas(path) {
    fabric.Image.fromURL(path, function (img) {
      var scale = 1;
@@ -691,7 +707,7 @@
        objectCaching: false,
      });
      canvas.centerObject(img);
-     canvas.add(img).setActiveObject(img);
+     canvas.fxAdd(img);
      sendClothToBack();
 
    });
@@ -766,7 +782,7 @@
        scaleY: 1,
      });
 
-   canvas.setBackgroundImage('../images/background.jpg', canvas.renderAll.bind(canvas));
+   canvas.setBackgroundImage(backgroundImage, canvas.renderAll.bind(canvas));
    $("#btn-reset").popover('hide')
    //   var group = new fabric.Group();
    //   canvas.getObjects().forEach(function (obj) {
@@ -851,7 +867,6 @@
        //       source: pattern,
        repeat: 'repeat',
      }));
-     console.log(object.fill.source)
      setFilterColor(img, color);
      patternSourceCanvas.add(img);
      patternSourceCanvas.renderAll();
@@ -1068,15 +1083,45 @@
      if (clonedObj.type === 'activeSelection') {
        clonedObj.canvas = canvas;
        clonedObj.forEachObject(function (obj) {
-         canvas.add(obj);
+         canvas.fxAdd(obj);
        });
        clonedObj.setCoords();
      } else {
-       canvas.add(clonedObj);
+       canvas.fxAdd(clonedObj);
      }
      _copypaste.top += 10;
      _copypaste.left += 10;
      canvas.setActiveObject(clonedObj);
      //     canvas.requestRenderAll();
    });
+ }
+
+// TODO PREVIEW
+ function preview() {
+   var group = new fabric.Group();
+   $("#btnPreview").prop("disabled",true);
+   canvas.getObjects().forEach(function (obj) {
+     //    group.add(obj);
+     var temp = obj.top;
+     console.log("temp " + temp)
+     obj.animate('top',obj.top <= -200 ? obj.top+200 : -200, {
+       duration: 1000,
+       onChange: canvas.renderAll.bind(canvas),
+       onComplete: function () {
+     console.log(obj.top)
+         $("#btnPreview").prop("disabled",false);
+       },
+       easing: fabric.util.ease.easeOutQuad,
+     });
+   });
+//   canvas.add(group);
+//   canvas.renderAll();
+//   group.animate('top', -200, {
+//     duration: 5000,
+//     onChange: canvas.renderAll.bind(canvas),
+//     onComplete: function () {
+//       canvas.remove(group)
+//     },
+//     easing: fabric.util.ease.easeOutQuad,
+//   });
  }

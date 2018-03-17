@@ -9,7 +9,7 @@
       <h5 class="text-light">Contact us</h5>
       <h6 class="text-light">Contact Number : <span class="font-weight-normal">+63 917 5816868</span></h6>
       <h6 class="text-light">Email Address : <a href="mailto:adamarc_bd@yahoo.com" class="text-info">adamarc_bd@yahoo.com</a></h6>
-      <button class="btn btn-sm btn-outline-warning" type="button"><span class="fa fa-comments"></span> Send Feedback</button>
+      <button class="btn btn-sm btn-outline-warning" type="button" onclick="window.open('about.php#feedback-page', '_self')"><span class="fa fa-comments"></span> Send Feedback</button>
     </div>
     <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 text-light">
       <div class="row">
@@ -27,7 +27,7 @@
 </div>
 <script>
   function myMap() {
-    var myCenter = new google.maps.LatLng(14.843004, 120.8432648);
+    var myCenter = new google.maps.LatLng(14.842891, 120.843160);
     var mapCanvas = document.getElementById("map");
     var mapOptions = {
       center: myCenter,
