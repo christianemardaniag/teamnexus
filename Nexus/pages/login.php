@@ -19,7 +19,8 @@
     if ($pass == $custpass)
     {
       $_SESSION["current_user"] = $row["firstname"];
-      $_SESSION["isAdmin"] = "none";
+      $_SESSION["current_user_email"] = $row["email"];
+      $_SESSION["isAdmin"] = "none"; 
       echo $_SESSION["current_user"];
       
     }

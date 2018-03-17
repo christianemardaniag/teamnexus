@@ -24,7 +24,7 @@
           </li>
           <li class="nav-item pr-4">
             <div class="dropdown">
-              <button id="login" class="btn btn-warning" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button"><?php echo $current_user;?></button>
+              <button id="login" class="btn btn-outline-warning text-capitalize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="button"><?php echo $current_user;?></button>
               
                 
               

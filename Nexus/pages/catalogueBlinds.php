@@ -20,11 +20,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link type="text/css" href="../css/ihover.css" rel="stylesheet">
 
-  <link rel="stylesheet" href="../ihover-gh-pages/src/hover.css" />
-  <link rel="stylesheet" href="../ihover-gh-pages/src/hover.min.css" />
 
 
-  <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
   <script type="text/javascript" src="../js/fabric.js"></script>
   <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
 
@@ -77,13 +74,13 @@
            
           $img = $dbQ->getBlob($row["image"]);
           
-          echo "<div class='card'>";
-          echo "<img class='card-img-top imgViewBlinds' src='$img' data-bt = '".$row['Blinds_Type']."' >";
+          echo "<div class='card' style='cursor: pointer'>";
+          echo "<img class='card-img-top imgViewBlinds' src='$img' id = '".$row['blinds_id']."'/>";
           echo "<div class='card-body'>";
           echo "<h4 class='card-title'>".$row['Blinds_Type']."</h4>";
           echo "<p class='card-text'>".$row['description']."</p>";
-          echo "<button type='button' class='btn btn-warning btnaddOrder' ><span class=' fa fa-cart-plus'>Add to order</span></button>";
-          echo "<span class=' fa fa-cart-plus'>Quantity</span><input type='number' min = '1' value = '1' id = 'quan".$row['blinds_id']."'/>";
+//          echo "<button type='button' class='btn btn-warning btnaddOrder' ><span class=' fa fa-cart-plus'>Add to order</span></button>";
+//          echo "<span class=' fa fa-cart-plus'>Quantity</span><input type='number' min = '1' value = '1' id = 'quan".$row['blinds_id']."'/>";
           echo "</div>";
           echo "</div>";
   
@@ -93,7 +90,7 @@
       
      
     ?>
-<!--     modal alert-->
+      <!--     modal alert-->
       <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
@@ -101,7 +98,7 @@
               <h5 class="modal-title">Warning</h5>
             </div>
             <div class="modal-body">
-              <p id = 'pMessage'></p>
+              <p id='pMessage'></p>
             </div>
             <div class="modal-footer">
               <button class="btn btn-sm btn-link text-secondary" data-dismiss="modal">Cancel</button>
@@ -111,14 +108,16 @@
         </div>
       </div>
 
-<!--modal view blinds-->
+      <!--modal view blinds-->
       <div tabindex="-1" class="modal fade" id="myModal-catalogueBlinds" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <button class="close" id="close" type="button" data-dismiss="modal">×</button>
-              <h3 class="modal-title"></h3>
+             <h4 class="modal-title"><span>Roller Blinds</span></h4>
+             <button class="close" id="close" type="button" data-dismiss="modal">×</button>
             </div>
+              
+              
             <div class="modal-body">
               <div class="container-fluid">
                 <div class="row">
@@ -126,16 +125,14 @@
                     <img src="" alt="img1" class="img-fluid" id="modal-catalogueBlinds">
                   </div>
                   <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-5">
-                    <h3>
-                      
-                    </h3>
-                    <div class="dropdown-divider"></div>
-                    <div><span>roller blinds</span></div>
-                    <div><span class=' fa fa-cart-plus'>Quantity</span><input type='number' min = '1' value = '1'/></div>
-                    <div><span class=' fa fa-cart-plus'>Size:</span><span>W</span><input type='number' min = '1' value = '1'/>
-                    <span>L</span><input type='number' min = '1' value = '1'/></div>
-                    <div><input type='hidden' id = 'fabid'/></div>
-                    
+                   
+<!--                    <div class="dropdown-divider"></div>-->
+                    <div><span class=' fa fa-cart-plus'>Quantity</span><input type='number' min='1' value='1' id='orderQuantity' /></div>
+                    <div><span class=' fa fa-cart-plus'>Size:</span><br /><span>W</span><input type='number' min='1' value='1' id='orderWidth' />
+                      <br /><span>L</span><input type='number' min='1' value='1' id='orderLength' /></div>
+                    <button type='button' class='btn btn-warning' id="btnaddOrder" data-iscustomed="no"><span class=' fa fa-cart-plus'>Add to order</span></button>
+                    <div><input type='hidden' id='fabid' /></div>
+
                   </div>
                 </div>
               </div>
@@ -155,7 +152,10 @@
       <script type="text/javascript" src="../js/bootstrap.bundle.min.js"></script>
       <!--  <script type="text/javascript" src="../js/mdb.min.js"></script>-->
       <script type="text/javascript" src="../js/allscript.js"></script>
+      <script>
+       
 
+      </script>
 </body>
 
 </html>

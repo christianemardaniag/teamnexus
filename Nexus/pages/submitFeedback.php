@@ -6,10 +6,10 @@
   $email = $_POST["email"];
   $rating = $_POST["hiddenRating"];
   $selectedType = $_POST["selectedType"];
-  $today = date("Y/m/d");
+  $today = date("Y/m/d h:i:sa");
 
 
-  $query = "INSERT INTO `feedback`(`email`, `feedback_type`, `message`, `short_summary`, `ratings`, `feedback_date`) VALUES ('$email','$selectedType','$message','$summary',$rating,$today)";
+  $query = "INSERT INTO `feedback`(`email`, `feedback_type`, `message`, `short_summary`, `ratings`, `feedback_date`) VALUES ('$email','$selectedType','$message','$summary',$rating,'$today')";
 
   $dbQ = new DatabaseQuery(new DatabaseInfo);
 
