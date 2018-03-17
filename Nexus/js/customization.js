@@ -57,6 +57,16 @@
  }
 
  $(document).ready(function () {
+   
+   $('body').on('click', function (e) {
+    $('[data-toggle="popover"]').each(function () {
+        //the 'is' for buttons that trigger popups
+        //the 'has' for icons within a button that triggers a popup
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+            $(this).popover('hide');
+        }
+    });
+   });
    $(".dropify-wrapper").addClass("d-none");
    // DISABLE RIGHT CLICK ON CANVAS
    $("#canvasSizer").on("contextmenu", function (e) {
@@ -118,7 +128,13 @@
        scaleX: 1,
        scaleY: 1,
      });
-
+   
+//   canvas.setBackgroundColor('', canvas.renderAll.bind(canvas));
+//   canvas.setBackgroundImage(0, canvas.renderAll.bind(canvas));
+//   canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+//               scaleX: canvas.width / img.width,
+//               scaleY: canvas.height / img.height
+//            });
    canvas.setBackgroundImage(backgroundImage, canvas.renderAll.bind(canvas));
 
 
@@ -308,7 +324,7 @@
      });
      $("#btnSetting").toggleClass("invisible");
    }
-// NOTE INSERT OBJECT
+   // NOTE INSERT OBJECT
    $("#btnText").click(function () {
      var text = new fabric.Textbox("text", {
        id: "textbox",
@@ -318,7 +334,7 @@
        textAlign: 'center',
        objectCaching: false
      });
-//     canvas.centerObject(text);
+     //     canvas.centerObject(text);
      canvas.fxAdd(text);
      canvas.renderAll();
      sendClothToBack();
@@ -332,8 +348,8 @@
        //      fill: color[getRandomInt(0, colorEnd)],
        perPixelTargetFind: true,
        //       opacity: 0.8,
-//       originX: 'center',
-//       originY: 'center',
+       //       originX: 'center',
+       //       originY: 'center',
        objectCaching: false,
        //      clipName: 'objectOutside',
        //      clipTo: function (ctx) {
@@ -341,7 +357,7 @@
        //      }
 
      });
-//     canvas.centerObjectH(circle);
+     //     canvas.centerObjectH(circle);
      canvas.fxAdd(circle);
      loadPattern(fabricType, circle, color[getRandomInt(0, colorEnd)]);
      sendClothToBack();
@@ -362,7 +378,7 @@
        objectCaching: false,
 
      });
-//     canvas.centerObject(rectangle);
+     //     canvas.centerObject(rectangle);
      canvas.fxAdd(rectangle);
      loadPattern(fabricType, rectangle, color[getRandomInt(0, colorEnd)]);
      sendClothToBack();
@@ -377,7 +393,7 @@
        //       opacity: 0.8,
        objectCaching: false
      });
-//     canvas.centerObject(line);
+     //     canvas.centerObject(line);
      canvas.fxAdd(line);
      canvas.renderAll();
      sendClothToBack();
@@ -690,7 +706,7 @@
 
 
  }); // END OF DOCUMENT READY
-// NOTE INSERT IMAGE
+ // NOTE INSERT IMAGE
  function insertImageToCanvas(path) {
    fabric.Image.fromURL(path, function (img) {
      var scale = 1;
@@ -1096,32 +1112,37 @@
    });
  }
 
-// TODO PREVIEW
+ // TODO PREVIEW
+ var temp, temp2 = 0,
+   flag = true, objTop=[];
+
  function preview() {
-   var group = new fabric.Group();
-   $("#btnPreview").prop("disabled",true);
-   canvas.getObjects().forEach(function (obj) {
-     //    group.add(obj);
-     var temp = obj.top;
-     console.log("temp " + temp)
-     obj.animate('top',obj.top <= -200 ? obj.top+200 : -200, {
-       duration: 1000,
-       onChange: canvas.renderAll.bind(canvas),
-       onComplete: function () {
-     console.log(obj.top)
-         $("#btnPreview").prop("disabled",false);
-       },
-       easing: fabric.util.ease.easeOutQuad,
-     });
-   });
-//   canvas.add(group);
-//   canvas.renderAll();
-//   group.animate('top', -200, {
-//     duration: 5000,
-//     onChange: canvas.renderAll.bind(canvas),
-//     onComplete: function () {
-//       canvas.remove(group)
-//     },
-//     easing: fabric.util.ease.easeOutQuad,
+   $("#btnPreview").prop("disabled", true);
+   allObjLen = canvas.getObjects().length;
+   objTop = new Array(allObjLen)
+   for(var i = 0; i < allObjLen; i++){
+     var obj = canvas.getObjects()[i];
+     temp = obj.top;
+     console.log(objTop[0])
+//     obj.animate('top', obj.top <= -200 ? objTop[i] : -200, {
+//       duration: 1000,
+//       onChange: canvas.renderAll.bind(canvas),
+//       onComplete: function () {
+//         if (flag) {
+//           objTop[i] = temp;
+//           console.log(objTop[i])
+//           flag = false;
+//         } else {
+//           flag = true;
+//         }
+//         $("#btnPreview").prop("disabled", false);
+//       },
+//       easing: fabric.util.ease.easeOutQuad,
+//     });
+   }
+//   
+//   canvas.getObjects().forEach(function (obj) {
+//     temp = obj.top;
 //   });
+
  }

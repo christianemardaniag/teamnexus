@@ -160,7 +160,7 @@
           </div>
           <div class="col-sm-6">
            <h5 class="mt-2">Mr. Noel Manio</h5>
-            The owner of the firm, <b>Mr. Noel Manio</b> started this business primarily because of demand in interior designs such as window blinds coupled with his fashion and knowledge in marketing and working experience. AdamArc firm has its color theme of green and brown that makes it more nature like that looks charming and pleasant in appearance for most of the customers.
+            The owner of the firm, <b>Mr. Noel Manio</b> started this business primarily because of demand in interior designs such as window blinds coupled with his fashion and knowledge in marketing and working experience.
           </div>
         </div>
 

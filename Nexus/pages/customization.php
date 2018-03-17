@@ -73,7 +73,7 @@
                   <div class="col-sm-8 pt-2">
                     <div class="lead">Select Window Blinds</div>
                   </div>
-                  <button class="col-sm-4 btn btn-link btn-sm"><i class="fas fa-folder-open"></i> Open Templates</button>
+                  <button class="col-sm-4 btn btn-link btn-sm"><i class="fas fa-image"></i> Change Backround</button>
                 </div>
               </div>
 
