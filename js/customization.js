@@ -11,10 +11,10 @@
  });
 
  var combi = new fabric.Rect({
-   width: 400,
+   width: 800,
    id: "cloth",
    height: 20,
-   top: 40,
+   top: 50,
    lockMovementX: true,
    lockMovementY: true,
    hasControls: false,
@@ -30,11 +30,11 @@
    width: 800,
    height: 660,
    top: 40,
-   //   lockMovementX: true,
-   //   lockMovementY: true,
-   //   hasControls: false,
-   //   selectable: false,
-   //   selection: true,
+   lockMovementX: true,
+   lockMovementY: true,
+   hasControls: false,
+   selectable: false,
+   selection: true,
    objectCaching: false,
  });
 
@@ -44,8 +44,8 @@
 
  var fabricType = "../images/fabric-1.jpg";
  var translucent = "../images/tanslucent.jpg";
- var overlayImage = "../images/templateImages/overlay.png";
- var backgroundImage = '../images/background3.jpg';
+ var overlayImage = "../images/window.png";
+ var backgroundImage = '../images/morning.jpg';
  var summary = {
    blinds: "",
    blindsCode: "",
@@ -72,6 +72,8 @@
    hasControls: false,
  });
 
+ var insertLine = false,
+   line, isDown;
  $(document).ready(function () {
 
    $('body').on('click', function (e) {
@@ -137,7 +139,7 @@
    window.addEventListener('load', resizeCanvas, false);
 
    canvas.setZoom(1.1);
-   //
+
    canvas.setOverlayImage(overlayImage,
      canvas.renderAll.bind(canvas), {
        scaleX: 1,
@@ -273,6 +275,29 @@
        $("#btnSetting").addClass("invisible");
      }
      panning = true;
+     if (insertLine) {
+       isDown = true;
+       var pointer = canvas.getPointer(e.e);
+       var points = [pointer.x, pointer.y, pointer.x, pointer.y];
+       line = new fabric.Line(points, {
+         id: 'line',
+         strokeWidth: 3,
+         stroke: color[getRandomInt(0, colorEnd)],
+         //         perPixelTargetFind: true,
+         //         top: 100,
+         //         left: 230,
+         objectCaching: false,
+         //         lockScalingFlip: true,
+         originX: 'center',
+         originY: 'center',
+         clipName: 'clipObj',
+         clipTo: function (ctx) {
+           return _.bind(clipByName, line)(ctx)
+         }
+       });
+       canvas.add(line);
+
+     }
    });
    canvas.on('object:scaling', function (e) {
      $('#btnDelete').tooltip('hide');
@@ -288,9 +313,17 @@
    });
    canvas.on('mouse:up', function (e) {
      panning = false;
+     isDown = false;
+     if (insertLine) {
+       insertLine = false;
+       canvas.setActiveObject(line);
+       canvas.renderAll();
+       $("#mainCanvas").css("cursor", "auto");
+     }
    });
    canvas.on("mouse:move", function (e) {
      if ((panning && e.e.altKey) || (panning && window.isPan)) {
+       msg("panning")
        if (zoomLevel != 0) {
 
          canvas.selection = false;
@@ -304,7 +337,16 @@
        $('#btnPan').find('[data-fa-i2svg]').toggleClass('fa-hand-paper');
      }
 
+     if (insertLine) {
 
+       if (!isDown) return;
+       var pointer = canvas.getPointer(e.e);
+       line.set({
+         x2: pointer.x,
+         y2: pointer.y
+       });
+       canvas.renderAll();
+     }
    })
 
    // END OF CANVAS OBJECT EVENTS
@@ -352,12 +394,12 @@
        left: 230,
        textAlign: 'center',
        objectCaching: false,
-//       originX: 'center',
-//       originY: 'center',
-//       clipName: 'clipObj',
-//       clipTo: function (ctx) {
-//         return _.bind(clipByName, text)(ctx)
-//       }
+       //       originX: 'center',
+       //       originY: 'center',
+       //       clipName: 'clipObj',
+       //       clipTo: function (ctx) {
+       //         return _.bind(clipByName, text)(ctx)
+       //       }
      });
      //     canvas.centerObject(text);
      canvas.fxAdd(text);
@@ -413,25 +455,28 @@
      sendClothToBack();
    });
    $("#btnLine").click(function () {
-     var line = new fabric.Line([getRandomInt(50, 250), getRandomInt(50, 250), getRandomInt(50, 250), getRandomInt(50, 250)], {
-       id: "line",
-       strokeWidth: getRandomInt(3, 10),
-       stroke: color[getRandomInt(0, colorEnd)],
-       perPixelTargetFind: true,
-       top: 100,
-       left: 230,
-       objectCaching: false,
-       lockScalingFlip: true,
-       originX: 'center',
-       originY: 'center',
-       clipName: 'clipObj',
-       clipTo: function (ctx) {
-         return _.bind(clipByName, line)(ctx)
-       }
-     });
-     canvas.fxAdd(line);
-     canvas.renderAll();
-     sendClothToBack();
+     insertLine = true;
+     $("#mainCanvas").css("cursor", "crosshair");
+
+     //     var line = new fabric.Line([getRandomInt(50, 250), getRandomInt(50, 250), getRandomInt(50, 250), getRandomInt(50, 250)], {
+     //       id: "line",
+     //       strokeWidth: getRandomInt(3, 10),
+     //       stroke: color[getRandomInt(0, colorEnd)],
+     //       perPixelTargetFind: true,
+     //       top: 100,
+     //       left: 230,
+     //       objectCaching: false,
+     //       lockScalingFlip: true,
+     //       originX: 'center',
+     //       originY: 'center',
+     //       clipName: 'clipObj',
+     //       clipTo: function (ctx) {
+     //         return _.bind(clipByName, line)(ctx)
+     //       }
+     //     });
+     //     canvas.fxAdd(line);
+     //     canvas.renderAll();
+     //     sendClothToBack();
 
    });
    $("#btnTriangle").click(function () {
@@ -463,10 +508,11 @@
    /*
     ** OTHER FUNCTIONS
     */
-   
+
    $("#modalSummaryOrder").on("show.bs.modal", function (event) {
      canvas.discardActiveObject();
-    var preview = canvas.toDataURL('jpg');
+     canvas.renderAll();
+     var preview = canvas.toDataURL('jpg');
      var minW = $("#cloth-width").val() + " " + $("#width-unit").val();
      var minH = $("#cloth-height").val() + " " + $("#height-unit").val();
      $("#summary-modal-blinds").val(summary.blinds);
@@ -474,8 +520,7 @@
      $("#summary-modal-size").val(minW + " x " + minH);
      $("#summary-modal-quantity").val($("#summary-quantity").val());
      $("#summary-modal-image").attr("src", preview);
-     console.log(summary.blinds)
-     
+
    });
 
    $("#confirmModal").on("show.bs.modal", function (event) {
@@ -558,7 +603,6 @@
              _clipboard = cloned;
            });
            canvas.remove(object)
-           //          $("#undo").parent().removeClass('invisible');
          }
        });
 
@@ -577,7 +621,6 @@
            onComplete: function () {
              canvas.remove(object)
              canvas.discardActiveGroup();
-             //          $("#undo").parent().removeClass('invisible');
            }
          });
        });
@@ -594,35 +637,7 @@
    $(document).keydown(function (event) {
      if (event.which == 46) { //46 = ascii delete key
        doDelete();
-     } else if (event.ctrlKey && event.keyCode == 86) {
-       Paste();
-     } else if (event.ctrlKey && event.keyCode == 67) {
-       Copy();
      }
-   });
-
-   $("#undoClose").click(function () {
-     $("#undoClose").parent().addClass('invisible');
-   });
-   $("#undo").click(function () {
-     _clipboard.clone(function (clonedObj) {
-       canvas.fxAdd(clonedObj);
-       canvas.renderAll();
-       $("#undo").parent().addClass('invisible');
-       clonedObj.animate({
-         top: "+=300",
-         opacity: 1
-       }, {
-         duration: 300,
-         onChange: canvas.renderAll.bind(canvas),
-         easing: fabric.util.ease.easeOutBack,
-         onComplete: function () {
-
-           canvas.setActiveObject(clonedObj);
-
-         }
-       });
-     });
    });
 
    var hexColor = ["#6B5B95", "#ECDB54", "#E94B3C", "#6F9FD8", "#944743", "#DBB1CD", "#EC9787", "#00A591", "#6C4F3D", "#EADEDB", "#BC70A4", "#BFD641", "#2E4A62", "#B4B7BA"];
@@ -676,37 +691,6 @@
      activeObject.sendToBack();
      activeObject.bringForward();
      canvas.renderAll();
-   });
-
-   $('#lock').on('click', function () {
-     canvas.discardActiveObject();
-     $(this)
-       .find('[data-fa-i2svg]')
-       .toggleClass('fa-lock-open fa-lock');
-     $(this).toggleClass("text-dark text-info");
-
-     canvas.getObjects().forEach(function (obj) {
-       var objID = obj.id;
-       if (~objID.indexOf("cloth")) {
-         obj.set({
-           selectable: $("#lock").hasClass("lock") ? true : false,
-         });
-       }
-     });
-     $("#lock").toggleClass("lock");
-     canvas.renderAll();
-   });
-
-   $("#check-translucent").change(function () {
-     if (this.checked) {
-       activeObject = canvas.getActiveObject();
-       activeObject.set({
-         opacity: 1,
-         id: activeObject.id + "_translucent"
-       });
-       changeColor(translucent, "white")
-
-     } // END OF IF
    });
 
    var lastWidthValue = $("#width-unit").val();
@@ -858,11 +842,13 @@
    summary.fabric = fabricName;
    fabricType = fabricImg;
    summary.fabricCode = fabricCode;
-   console.log(fabricType)
    if (canvas.getObjects().length == 0) {
      if (type == "Roller Shades") {
+       $("#btnPreview").removeClass("d-none");
        loadRoller();
      } else if (type == "Combi Blinds") {
+       $("#btnPreview").removeClass("d-none");
+       canvas.preserveObjectStacking = false;
        loadCombi(fabricType, 'white')
      }
      canvas.renderAll();
@@ -874,7 +860,7 @@
 
  function modalChangeShades() {
    removeCloth();
-   changeShades(summary.blinds, summary.blindsCode, summary.fabric, summary.fabricCode)
+   changeShades(summary.blinds, summary.blindsCode, summary.fabric, fabricType, summary.fabricCode)
  }
 
  function loadRoller() {
@@ -909,58 +895,40 @@
  function loadCombi(fabricType, color) {
    canvas.add(clipRect1);
    var ctr = 0;
-      for (var i = 0; i < 13; i++) {
-        var object = fabric.util.object.clone(combi);
-        object.set({
-          "id": 'cloth-' + i,
-          "top": (object.top + ctr),
-          "opacity": (i % 2 == 0) ? 1 : 0.7,
-          "left": 80,
-//      originX: 'center',
-//          originY: 'center',
-//          clipName: 'clipObj',
-//          clipTo: function (ctx) {
-//            return _.bind(clipByName, object)(ctx)
-//          }
-        });
-        ctr += object.height;
-        canvas.add(object);
-        if (i % 2 == 0) {
-          loadPattern(translucent, object, color);
-        } else {
-          loadPattern(fabricType, object, color);
-        }
-      }
+   for (var i = 0; i < 13; i++) {
+     var object = fabric.util.object.clone(combi);
+     object.set({
+       "id": 'cloth-' + i,
+       "top": (object.top + ctr),
+       "opacity": (i % 2 == 0) ? 1 : 0.7,
+       "left": 80,
+     });
+     ctr += object.height;
+     canvas.add(object);
+     if (i % 2 == 0) {
+       loadPattern(translucent, object, color);
+     } else {
+       loadPattern(fabricType, object, color);
+     }
+   }
    // FIXME COMBI BLINDS BACK FABRIC
-//   ctr = 0;
-//   for (var i = 13; i < 26; i++) {
-//     var object = fabric.util.object.clone(combi);
-//     object.set({
-//       "id": 'cloth-' + i + '-back',
-//       "top": (object.top + ctr),
-//       "opacity": (i % 2 == 0) ? 0.7 : 1,
-//       "left": 80,
-//       originX: 'center',
-//       originY: 'center',
-//       clipName: 'clipObj',
-//       clipTo: function (ctx) {
-//         return _.bind(clipByName, object)(ctx)
-//       }
-//     });
-//     ctr += object.height;
-
-     // FIXME CLIPTO IN COMBI BLINDS
-     //          object.clipTo = function (ctx) {
-     //            return _.bind(clipByName, object)(ctx)
-     //          }
-
-//     canvas.add(object);
-//     if (i % 2 == 0) {
-//       loadPattern(fabricType, object, "red");
-//     } else {
-//       loadPattern(translucent, object, "blue");
-//     }
-//   }
+   ctr = 0;
+   for (var i = 13; i < 26; i++) {
+     var object = fabric.util.object.clone(combi);
+     object.set({
+       "id": 'cloth-' + i + '-back',
+       "top": (object.top + ctr),
+       "opacity": (i % 2 == 0) ? 1 : 0.7,
+       "left": 80,
+     });
+     ctr += object.height;
+     canvas.add(object);
+     if (i % 2 == 0) {
+       loadPattern(fabricType, object, "white");
+     } else {
+       loadPattern(translucent, object, "white");
+     }
+   }
 
  }
 
@@ -991,34 +959,34 @@
  }
 
  function loadPattern(url, object, color) {
-
-   // FIXME [X] URGENT!! FABRIC PATTERN (DIKO NA KAYA)
-
    fabric.Image.fromURL(url, function (img) {
      img.scaleToWidth(100);
      var patternSourceCanvas = new fabric.StaticCanvas();
-     //   
-     //        patternSourceCanvas.add(img);
-     //        patternSourceCanvas.renderAll();
-     //        patternSourceCanvas.setDimensions({
-     //          width: 50,
-     //          height: 50
-     //        });
-     //        patternSourceCanvas.renderAll();
      var pattern = patternSourceCanvas.getElement();
-     object.set('fill', new fabric.Pattern({
-       source: function () {
-         patternSourceCanvas.setDimensions({
-           width: 50,
-           height: 50
-         });
-         patternSourceCanvas.renderAll();
-         return patternSourceCanvas.getElement();
-       },
-
-       //       source: pattern,
-       repeat: 'repeat',
-     }));
+     object.set({
+       'fill': new fabric.Pattern({
+         source: function () {
+           patternSourceCanvas.setDimensions({
+             width: 50,
+             height: 50
+           });
+           patternSourceCanvas.renderAll();
+           return patternSourceCanvas.getElement();
+         },
+         repeat: 'repeat',
+       }),
+       'stroke': new fabric.Pattern({
+         source: function () {
+           patternSourceCanvas.setDimensions({
+             width: 50,
+             height: 50
+           });
+           patternSourceCanvas.renderAll();
+           return patternSourceCanvas.getElement();
+         },
+         repeat: 'repeat',
+       })
+     });
      setFilterColor(img, color);
      patternSourceCanvas.add(img);
      patternSourceCanvas.renderAll();
@@ -1034,11 +1002,8 @@
      mode: 'multiply',
      alpha: 1
    });
-   //   console.log(object)
-   object.backgroundColor = "green";
    object.filters.push(filter);
    object.applyFilters(canvas.renderAll.bind(canvas));
-   //  canvas.renderAll();
  }
 
  function allColors() {
@@ -1114,50 +1079,52 @@
 
  function order() {
    // FUTURE SAVE TEMPLATE TO JSON
-   console.log(summary.blindsCode);
-   console.log(summary.fabricCode);
-   console.log($("#template-name").val());
-   console.log("isCustomize");
-   console.log($("#summary-quantity").val());
-   console.log(convertUnit($("#cloth-width").val(), $("#width-unit").val(), "cm").toFixed())
-   console.log(convertUnit($("#cloth-height").val(), $("#height-unit").val(), "cm").toFixed())
-   console.log($.now())
-//   $("#btnaddOrder").click(function () {
-//    var quan = $("#orderQuantity").val();
-//    var width = $("#orderWidth").val();
-//    var len = $("#orderLength").val();
-//    var isCustomed = $("#btnaddOrder").data("iscustomed");
-//
-//    $.ajax({
-//      type: "GET",
-//      url: "../pages/addOrder.php",
-//      dataType: "text",
-//      data: {
-//
-//        "blindsID": blindsOrderID,
-//        "quantity": quan,
-//        "length": len,
-//        "width": width,
-//        "iscustomed": isCustomed
-//
-//
-//      },
-//      success: function (data) {
-//        alert(data);
-//
-//      }
-//
-//    });
-//
-//  });
+   msg("Blinds ID: " + summary.blindsCode);
+   msg("Fabric ID: " + summary.fabricCode);
+   msg("isCustomize");
+   msg("Quantity: "+$("#summary-quantity").val());
+   msg("Width: "+convertUnit($("#cloth-width").val(), $("#width-unit").val(), "cm").toFixed());
+   msg("Height: "+convertUnit($("#cloth-height").val(), $("#height-unit").val(), "cm").toFixed());
+   msg("Date now: "+$.now());
+   var preview = canvas.toDataURL('jpg');
+   msg("Preview: " + preview);
+ }
+
+ function step1() {
+   $("#colorForFabric").append($("#inputFillColor").parent())
+   canvas.getObjects().forEach(function (obj) {
+     obj.set({
+       selectable: true
+     });
+   });
  }
 
  function step2() {
    $("#colorForFabric").append($("#inputFillColor").parent())
+   canvas.getObjects().forEach(function (obj) {
+     if (~obj.id.indexOf("cloth")) {
+       obj.set({
+         selectable: true
+       });
+       msg(obj.id)
+     }
+   });
  }
 
  function step3() {
    $("#colorForObject").append($("#inputFillColor").parent());
+ }
+
+ function step4() {
+   $("#colorForFabric").append($("#inputFillColor").parent())
+   canvas.getObjects().forEach(function (obj) {
+     canvas.discardActiveObject();
+     if (~obj.id.indexOf("cloth")) {
+       obj.set({
+         selectable: false
+       });
+     }
+   });
  }
 
  function getAllObject() {
@@ -1201,31 +1168,19 @@
  var objTop = [];
 
  function preview() {
+   $("#btnPreview").tooltip('hide')
    canvas.discardActiveObject();
    $("#btnPreview").prop("disabled", true);
    allObjLen = canvas.getObjects().length;
    if (flag) {
+     var isRoller = false;
      for (var i = 0; i < allObjLen; i++) {
        var obj = canvas.getObjects()[i];
        if (~obj.id.indexOf("back")) {
-         if(obj.id.indexOf("clip")){
-           objTop.push(obj.top)
-         obj.animate('top', obj.top - 240, {
-           duration: 3000,
-           onChange: canvas.renderAll.bind(canvas),
-           onComplete: function () {
-             flag = false;
-             $("#btnPreview").prop("disabled", false);
-           },
-           easing: fabric.util.ease.easeOutQuad,
-         });
-         obj.set({
-           selectable: false,
-         });
-         }
-       } else {
+         isRoller = true;
+         msg(obj.id)
          objTop.push(obj.top)
-         obj.animate('top', obj.top - 240, {
+         obj.animate('top', obj.top - 40, {
            duration: 3000,
            onChange: canvas.renderAll.bind(canvas),
            onComplete: function () {
@@ -1237,6 +1192,36 @@
          obj.set({
            selectable: false,
          });
+       } else {
+         if (isRoller) {
+           objTop.push(obj.top)
+           obj.animate('top', obj.top + 20, {
+             duration: 3000,
+             onChange: canvas.renderAll.bind(canvas),
+             onComplete: function () {
+               flag = false;
+               $("#btnPreview").prop("disabled", false);
+             },
+             easing: fabric.util.ease.easeOutQuad,
+           });
+           obj.set({
+             selectable: false,
+           });
+         }else{
+           objTop.push(obj.top)
+           obj.animate('top', obj.top - 240, {
+             duration: 3000,
+             onChange: canvas.renderAll.bind(canvas),
+             onComplete: function () {
+               flag = false;
+               $("#btnPreview").prop("disabled", false);
+             },
+             easing: fabric.util.ease.easeOutQuad,
+           });
+           obj.set({
+             selectable: false,
+           });
+         }
        }
      }
    } else {
@@ -1274,15 +1259,58 @@
    summary.fabricCode = "";
    objTop = [];
    flag = true;
+   $("#btn-reset").addClass("d-none");
+ }
+ var tempBg = window.backgroundImage,
+   tempOver = window.overlayImage;
+
+ function changeOverlay(img, e) {
+   e = e || window.event;
+   e = e.target || e.srcElement;
+   if (e.nodeName === 'IMG') {
+     var parent = e.parentElement;
+     var sibling = parent.parentElement.children;
+     var siblingLength = sibling.length;
+     for (i = 0; i < siblingLength; i++) {
+       if (sibling[i].classList.contains('border-primary')) {
+         sibling[i].classList.remove('border-primary');
+         sibling[i].classList.remove('p-1');
+       }
+     }
+     parent.classList.add('border-primary');
+     parent.classList.add('p-1');
+   }
+   tempOver = img;
  }
 
- function changeBackground(img) {
-   window.overlayImage = img;
-   canvas.setOverlayImage(overlayImage,
+ function changeBackground(img, e) {
+   e = e || window.event;
+   e = e.target || e.srcElement;
+   if (e.nodeName === 'IMG') {
+     var parent = e.parentElement;
+     var sibling = parent.parentElement.children;
+     var siblingLength = sibling.length;
+     for (i = 0; i < siblingLength; i++) {
+       if (sibling[i].classList.contains('border-primary')) {
+         sibling[i].classList.remove('border-primary');
+         sibling[i].classList.remove('p-1');
+       }
+     }
+     parent.classList.add('border-primary');
+     parent.classList.add('p-1');
+   }
+   tempBg = img;
+ }
+
+ function saveChanges() {
+   window.overlayImage = tempOver;
+   canvas.setOverlayImage(window.overlayImage,
      canvas.renderAll.bind(canvas), {
        scaleX: 1,
        scaleY: 1,
      });
+   window.backgroundImage = tempBg;
+   canvas.setBackgroundImage(window.backgroundImage, canvas.renderAll.bind(canvas));
  }
 
  function findByClipName(name) {
@@ -1322,3 +1350,7 @@
    ctx.restore();
  }
  // TODO UNLOCK CLOTH IN STEP 2
+
+ function msg(content) {
+   console.log(content);
+ }

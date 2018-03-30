@@ -22,15 +22,15 @@
 
   <link rel="stylesheet" href="../ihover-gh-pages/src/hover.css" />
   <link rel="stylesheet" href="../ihover-gh-pages/src/hover.min.css" />
-    
+
 
   <script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
-  
+
 
   <!--  <link type="text/css" href="../css/mdb.min.css" rel="stylesheet">-->
 
   <link type="text/css" href="../css/bootstrap.css" rel="stylesheet">
-<link type="text/css" href="../css/style.css" rel="stylesheet">
+  <link type="text/css" href="../css/style.css" rel="stylesheet">
 
 
 
@@ -53,7 +53,8 @@
       
   include("header.php");  
   ?>
-<div class="loading position-fixed"></div>
+    <div class="loading position-fixed"></div>
+    <!--
     <div class="jumbotron">
 
       <h2 class="display-2 text-center">Select a Category</h2>
@@ -63,7 +64,7 @@
       include("../classes/DatabaseQuery.php");
       $dbQ = new DatabaseQuery(new DatabaseInfo);
      
-        $query = "SELECT *, (select count(*) from blinds where blinds.blinds_category_id = blinds_category.blinds_category_id ) as 'ctr' FROM `blinds_category`";
+        $query = "SELECT *, (select count(*) from blinds where blinds.blinds_category_id = blinds_category.blinds_category_id and blinds_category.status='available') as 'ctr' FROM `blinds_category` WHERE blinds_category.status='available'";
   
         $res = $dbQ->query($query);
         echo "<div class='container'><div class='row'>";
@@ -72,43 +73,50 @@
           $img = $dbQ->getBlob($row["image"]);
                   
        //   <!-- Left to right -->
-          echo "<form action = 'catalogueBlinds.php' method = 'POST' >";
-          echo "<div class='col-sm-6 col-lg-4 col-xl-4'>";
- 
-   // <!-- normal -->
-      echo "<div class='ih-item circle effect3 left_to_right m-3'><a href = 'catalogueBlinds.php?catID=".$row['blinds_category_id']."'>
-            <div class='img'><img src= '$img' alt='".$row['blinds_type_name']."'></div>
-            <input type = 'hidden' value = '".$row['blinds_category_id']."' name = 'catID'/>
+    echo "
+    <form action='catalogueBlinds.php' method='POST'>"; echo "
+      <div class='col-sm-6 col-lg-4 col-xl-4'>"; //
+        <!-- normal -->
+        echo "
+        <div class='ih-item circle effect3 left_to_right m-3'>
+          <a href='catalogueBlinds.php?catID=".$row[' blinds_category_id ']."'>
+            <div class='img'><img src='$img' alt='".$row[' blinds_type_name ']."'></div>
+            <input type='hidden' value='".$row[' blinds_category_id ']."' name='catID' />
             <div class='info'>
-            <h3>".$row['blinds_type_name']."(".$row['ctr'].")"."</h3>
-            <p class = 'text-truncate'>".$row['description']."</p>
-            </div></a></div>";
-  //  <!-- end normal -->
- 
-        echo "</div>";
+              <h3>".$row['blinds_type_name']."(".$row['ctr'].")"."</h3>
+              <p class='text-truncate'>".$row['description']."</p>
+            </div>
+          </a>
+        </div>"; //
+        <!-- end normal -->
+
+        echo "</div>"; echo "</form>"; } echo "</div>
+    </div>"; ?> -->
+
+
+    <div class="jumbotron text-center" style="border: 0">
+      <h1 class="display-5">Catalogue</h1>
+    </div>
+
+    <div class="jumbotron" style="background: none">
+      <div class="container">
+        <div class="row">
           
-        echo "</form>";
- 
-            
-        }
-        echo "</div></div>";
-      
-     
-    ?>
+        </div>
+      </div>
+    </div>
 
+    <?php include("../include/footer.php"); ?>
+    <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.bundle.min.js"></script>
+    <!--  <script type="text/javascript" src="../js/mdb.min.js"></script>-->
+    <script type="text/javascript" src="../js/allscript.js"></script>
+    <script>
+      $(window).on('load', function() {
+        $(".loading").fadeOut("slow");
+      });
 
-
-
-      <?php include("../include/footer.php"); ?>
-      <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
-      <script type="text/javascript" src="../js/bootstrap.bundle.min.js"></script>
-      <!--  <script type="text/javascript" src="../js/mdb.min.js"></script>-->
-      <script type="text/javascript" src="../js/allscript.js"></script>
-      <script>
-   $(window).on('load', function () {
-   $(".loading").fadeOut("slow");
- });
-  </script>
+    </script>
 
 </body>
 

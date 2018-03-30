@@ -39,7 +39,7 @@
       
   include("header.php");  
   ?>
-        <div class="loading position-fixed"></div>
+    <div class="loading position-fixed"></div>
 
 
 
@@ -58,10 +58,10 @@
 
           <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-              <a class="nav-item nav-link active" id="nav-blinds-tab" data-toggle="tab" href="#nav-blinds" role="tab" aria-controls="nav-blinds" aria-selected="true">Step 1</a>
+              <button class="btn-link nav-item nav-link active" id="nav-blinds-tab" data-toggle="tab" href="#nav-blinds" role="tab" aria-controls="nav-blinds" aria-selected="true" onclick="step1()">Step 1</button>
               <button class="btn-link nav-item nav-link" id="nav-fabric-tab" data-toggle="tab" href="#nav-fabric" role="tab" aria-controls="nav-fabric" aria-selected="false" onclick="step2()">Step 2</button>
               <button class="btn-link nav-item nav-link" id="nav-properties-tab" data-toggle="tab" href="#nav-properties" role="tab" aria-controls="nav-properties" aria-selected="false" onclick="step3()">Step 3</button>
-              <a class="btn-link nav-item nav-link" id="nav-myContent-tab" data-toggle="tab" href="#nav-myContent" role="tab">Step 4</a>
+              <button class="btn-link nav-item nav-link" id="nav-myContent-tab" data-toggle="tab" href="#nav-myContent" role="tab" onclick="step4()">Step 4</button>
             </div>
           </nav>
 
@@ -152,7 +152,7 @@
                     }
                   ?>
                 </div>
-
+                <i class="text-secondary small">Hover fabric to magnify. Scroll to zoom in/out</i>
               </div>
             </div>
 
@@ -165,7 +165,7 @@
                   <button id="btnText" type="button" class="btn btn-info btn-sm m-1" data-toggle="tooltip" title="Insert Text"><i class="fas fa-font"></i> Text</button>
                   <button id="btnCircle" type="button" class="btn btn-info btn-sm m-1" data-toggle="tooltip" title="Insert Circle"><i class="fas fa-circle"></i> Circle</button>
                   <button class="btn btn-info btn-sm m-1" id="btnSquare" type="button" data-toggle="tooltip" title="Insert Square"><i class="fas fa-square"></i>  Square</button>
-                  <button class="btn btn-info btn-sm m-1" id="btnLine" type="button" data-toggle="tooltip" title="Insert Line"><i class="fas fa-minus"></i> Line</button>
+                  <button class="btn btn-info btn-sm m-1" id="btnLine" type="button" data-toggle="tooltip" title="Draw Line"><i class="fas fa-minus"></i> Line</button>
                   <button id="btnTriangle" class="btn btn-info btn-sm m-1" type="button" data-toggle="tooltip" title="Insert Triangle"><i class="fas fa-play" data-fa-transform="rotate-270"></i> Triangle</button>
                 </div>
               </div>
@@ -250,11 +250,13 @@
         <div class="tab-pane fade" id="nav-myContent" role="tabpanel" aria-labelledby="nav-myContent-tab">
 
           <div class="container mt-4">
+            <!--
             <div class="form-group row">
               <label for="template-name" class="col-sm-4 col-form-label">Template Name</label>
               <input id="template-name" type="text" class="col-sm-8 form-control" placeholder="My Favorite Design, e.g.">
             </div>
             <hr>
+-->
             <div class="form-group row">
 
               <label class="col-sm-4 col-form-label">Dimension</label>
@@ -309,7 +311,7 @@
     <input type="checkbox" autocomplete="off"><i class="fas fa-hand-paper"></i> <small class="d-none d-lg-inline">Move</small>
   </label>
         </div>
-        <button id="btnPreview" type="button" class="btn btn-light" data-toggle="tooltip" data-html="true" title="Preview" onclick="preview()"><i class="fas fa-eye"></i> <small class="d-none d-lg-inline">Preview</small></button>
+        <button id="btnPreview" type="button" class="btn btn-light d-none" data-toggle="tooltip" data-html="true" title="Preview" onclick="preview()"><i class="fas fa-eye"></i> <small class="d-none d-lg-inline">Preview</small></button>
         <button id="btn-reset" type="button" class="btn btn-light" data-toggle="popover" data-html="true" data-placement="bottom" title="Reset Design" data-content="Are you sure you want to reset your design?<div class='container'><div class='row'><button class='col btn btn-sm btn-info' onclick=cancelReset()>Cancel</button><button class='col btn btn-sm btn-link text-secondary text-muted' onclick=removeCloth()>Reset</button></div></div>"><i class="fas fa-sync"></i> <small class="d-none d-lg-inline">Reset</small></button>
         <button type="button" class="btn btn-light" data-toggle="popover" data-html="true" title="Help" data-html="true" data-content="<ul><li></li></ul>"><i class="fas fa-help"></i> <small class="d-none d-lg-inline">Help</small></button>
 
@@ -324,16 +326,8 @@
       </div>
 
     </div>
-    <img src="" id="preview">
     </div>
     <!--END OF ROW-->
-    <div class="alert bg-danger invisible w-25 alert-dismissible fixed-bottom mx-auto">
-      <button id="undo" class="btn p-0 alert-link btn-link text-light">Undo last deleted?</button>
-      <button id="undoClose" type="button" class="close text-light">
-    <span aria-hidden="true">&times;</span>
-  </button>
-    </div>
-
     </div>
     <!--END OF CONTAINER-->
 
@@ -390,39 +384,42 @@
             <div class="container-fluid">
               <h6>Overlay</h6>
               <div class="card-columns">
-                <div class="card">
-                  <img src="../images/window.png" class="card-img img-hover cursor-pointer" data-dismiss="modal" onclick="changeBackground(this.src)">
+                <div class="card border border-primary p-1">
+                  <img src="../images/window.png" class="card-img img-hover cursor-pointer" onclick="changeOverlay(this.src)">
                 </div>
                 <div class="clearfix"></div>
-                <div class="card">
-                  <img src="../images/templateImages/overlay.png" class="card-img img-hover cursor-pointer" data-dismiss="modal" onclick="changeBackground(this.src)">
+                <div class="card border">
+                  <img src="../images/templateImages/overlay.png" class="card-img img-hover cursor-pointer" onclick="changeOverlay(this.src)">
                 </div>
                 <div class="clearfix"></div>
-                <div class="card">
-                  <img src="../images/templateImages/edited.png" class="card-img img-hover cursor-pointer" data-dismiss="modal" onclick="changeBackground(this.src)">
+                <div class="card border">
+                  <img src="../images/templateImages/edited.png" class="card-img img-hover cursor-pointer" onclick="changeOverlay(this.src)">
                 </div>
                 <div class="clearfix"></div>
               </div>
               <h6>Background</h6>
-<!--
+              
               <div class="card-columns">
-                <div class="card">
-                  <img src="../images/window.png" class="card-img img-hover cursor-pointer" data-dismiss="modal" onclick="changeBackground(this.src)">
+                <div class="card border border-primary p-1">
+                  <img src="../images/morning.jpg" class="card-img img-hover cursor-pointer" onclick="changeBackground(this.src)">
                 </div>
                 <div class="clearfix"></div>
-                <div class="card">
-                  <img src="../images/templateImages/overlay.png" class="card-img img-hover cursor-pointer" data-dismiss="modal" onclick="changeBackground(this.src)">
+                <div class="card border">
+                  <img src="../images/afternoon.jpg" class="card-img img-hover cursor-pointer" onclick="changeBackground(this.src)">
                 </div>
                 <div class="clearfix"></div>
-                <div class="card">
-                  <img src="../images/templateImages/edited.png" class="card-img img-hover cursor-pointer" data-dismiss="modal" onclick="changeBackground(this.src)">
+                <div class="card border">
+                  <img src="../images/night.png" class="card-img img-hover cursor-pointer" onclick="changeBackground(this.src)">
                 </div>
                 <div class="clearfix"></div>
               </div>
--->
+
             </div>
           </div>
-
+          <div class="modal-footer">
+            <button class="btn btn-link text-muted" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-primary" onclick="saveChanges()" data-dismiss="modal">Apply</button>
+          </div>
         </div>
       </div>
     </div>
@@ -483,18 +480,27 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="card">
-                      <img class="img-fluid card-img-top img-hover cursor-pointer" src="../images/templateImages/PNG/hibiscus-pink-yellow-hi.png" onclick="insertImageToCanvas(this.src)" data-dismiss="modal">
-                      <a href="https://free4kwallpapers.com/" class="text-secondary text small ml-2" target="_blank">View Image Source</a>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="card">
-                      <img class="img-fluid card-img-top img-hover cursor-pointer" src="../images/templateImages/Video Game images/2623334-assassins-creed-movie-4k-image-of-best-wallpaper.jpg" onclick="insertImageToCanvas(this.src)" data-dismiss="modal">
-                      <a href="https://free4kwallpapers.com/" class="text-secondary text small ml-2" target="_blank">View Image Source</a>
+                      <img class="img-fluid card-img-top img-hover cursor-pointer" src="../images/templateImages/PNG/world_map.png" onclick="insertImageToCanvas(this.src)" data-dismiss="modal">
+                      <a href="http://chaimusic.us/-the-map-png.html" class="text-secondary text small ml-2" target="_blank">View Image Source</a>
                     </div>
                     <div class="clearfix"></div>
                     <div class="card">
                       <img class="img-fluid card-img-top img-hover cursor-pointer" src="../images/templateImages/PNG/cute-unicorn-card-and-poster-template_7096-454.png" onclick="insertImageToCanvas(this.src)" data-dismiss="modal">
                       <a href="https://www.freepik.com/premium-vector/cute-unicorn-card-and-poster-template_1773786.htm#term=background poster&page=2&position=26" class="text-secondary text small ml-2" target="_blank">View Image Source</a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="card">
+                      <img class="img-fluid card-img-top img-hover cursor-pointer" src="../images/templateImages/PNG/O9FG4R0.jpg" onclick="insertImageToCanvas(this.src)" data-dismiss="modal">
+                      <a href="http://gabrielecripezzi.com/academy/wp-content/uploads/2016/11/1wYVzIK1436862978036.jpg" class="text-secondary text small ml-2" target="_blank">View Image Source</a>
+                    </div>
+                    <div class="clearfix"></div>
+                     <div class="card">
+                      <img class="img-fluid card-img-top img-hover cursor-pointer" src="../images/templateImages/PNG/tree.png" onclick="insertImageToCanvas(this.src)" data-dismiss="modal">
+                      <a href="https://i.pinimg.com/originals/b2/50/d8/b250d89ce23afc5f12c023e8e956a21b.png" class="text-secondary text small ml-2" target="_blank">View Image Source</a>
+                    </div>
+                    <div class="clearfix"></div><div class="card">
+                      <img class="img-fluid card-img-top img-hover cursor-pointer" src="../images/templateImages/PNG/game_of_thrones_png_logo_by_sohrabzia-d7y9g1j.png" onclick="insertImageToCanvas(this.src)" data-dismiss="modal">
+                      <a href="https://orig00.deviantart.net/1bf2/f/2014/250/0/4/game_of_thrones_png_logo_by_sohrabzia-d7y9g1j.png" class="text-secondary text small ml-2" target="_blank">View Image Source</a>
                     </div>
                     <div class="clearfix"></div>
 

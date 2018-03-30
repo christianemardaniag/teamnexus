@@ -1,7 +1,7 @@
     
     <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Adam <i class="text-danger">A</i><i class="text-warning">r</i><i class="text-primary">c</i></a>
+      <a class="navbar-brand" href="../pages/home.php">Adam <i class="text-danger">A</i><i class="text-warning">r</i><i class="text-primary">c</i></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
