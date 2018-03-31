@@ -49,7 +49,10 @@
         “Real Luxury is Customization”
         <span class="blockquote-footer">Lapo Elkann</span>
       </blockquote>
+<<<<<<< HEAD
       <button class="btn btn-warning" data-toggle="modal" data-target="#customization-tutorial" onclick="document.getElementById('video').play(); ">Watch Tutorial</button>
+=======
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
     </div>
 
     <div class="container">
@@ -306,6 +309,7 @@
       <div class="btn-group" role="group">
         <button id="btnZoomIn" type="button" class="btn btn-light" data-toggle="tooltip" data-html="true" title="Zoom In <br><kbd>Alt + Scroll Up</kbd>" data-placement="top"><i class="fas fa-search-plus"></i> <small class="d-none d-lg-inline">Zoom In</small></button>
         <button id="btnZoomOut" type="button" class="btn btn-light" data-toggle="tooltip" data-html="true" title="Zoom Out <br><kbd>Alt + Scroll down</kbd>" data-placement="top"><i class="fas fa-search-minus"></i> <small class="d-none d-lg-inline">Zoom Out</small></button>
+<<<<<<< HEAD
 
         <div class="btn-group-toggle" data-toggle="buttons">
           <label id="btnPan" class="btn btn-light" data-toggle="tooltip" data-html="true" title="Move <br><kbd>Alt + Drag</kbd>" data-placement="top">
@@ -316,6 +320,18 @@
         <button id="btn-reset" type="button" class="btn btn-light" data-toggle="popover" data-html="true" data-placement="bottom" title="Reset Design" data-content="Are you sure you want to reset your design?<div class='container'><div class='row'><button class='col btn btn-sm btn-info' onclick=cancelReset()>Cancel</button><button class='col btn btn-sm btn-link text-secondary text-muted' onclick=removeCloth()>Reset</button></div></div>"><i class="fas fa-sync"></i> <small class="d-none d-lg-inline">Reset</small></button>
         <button type="button" class="btn btn-light" data-toggle="popover" data-html="true" title="Help" data-html="true" data-content="<ul><li></li></ul>"><i class="fas fa-help"></i> <small class="d-none d-lg-inline">Help</small></button>
 
+=======
+
+        <div class="btn-group-toggle" data-toggle="buttons">
+          <label id="btnPan" class="btn btn-light" data-toggle="tooltip" data-html="true" title="Move <br><kbd>Alt + Drag</kbd>" data-placement="top">
+    <input type="checkbox" autocomplete="off"><i class="fas fa-hand-paper"></i> <small class="d-none d-lg-inline">Move</small>
+  </label>
+        </div>
+        <button id="btnPreview" type="button" class="btn btn-light d-none" data-toggle="tooltip" data-html="true" title="Preview" onclick="preview()"><i class="fas fa-eye"></i> <small class="d-none d-lg-inline">Preview</small></button>
+        <button id="btn-reset" type="button" class="btn btn-light" data-toggle="popover" data-html="true" data-placement="bottom" title="Reset Design" data-content="Are you sure you want to reset your design?<div class='container'><div class='row'><button class='col btn btn-sm btn-info' onclick=cancelReset()>Cancel</button><button class='col btn btn-sm btn-link text-secondary text-muted' onclick=removeCloth()>Reset</button></div></div>"><i class="fas fa-sync"></i> <small class="d-none d-lg-inline">Reset</small></button>
+        <button type="button" class="btn btn-light" data-toggle="popover" data-html="true" title="Help" data-html="true" data-content="<ul><li></li></ul>"><i class="fas fa-help"></i> <small class="d-none d-lg-inline">Help</small></button>
+
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
       </div>
       <!--       NOTE CANVAS    -->
 
@@ -333,6 +349,7 @@
     <!--END OF CONTAINER-->
 
     <!-- NOTE MODALS -->
+<<<<<<< HEAD
     <div class="modal fade" id="customization-tutorial" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -347,6 +364,8 @@
       </div>
     </div>
 
+=======
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
 
     <div class="modal fade" id="modalSummaryOrder" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -379,7 +398,10 @@
           </div>
           <div class="modal-footer">
             <button class="btn btn-link text-secondary" data-dismiss="modal">Cancel</button>
+<<<<<<< HEAD
             <button id="shareToFacebook" class="btn btn-primary">Share</button>
+=======
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
             <button class="btn btn-success" onclick="order()">Continue</button>
           </div>
         </div>
@@ -395,6 +417,20 @@
           </div>
           <div class="modal-body">
 
+<<<<<<< HEAD
+=======
+
+    <div class="modal fade" id="changeBackgroundModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Change Background</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
             <div class="container-fluid">
               <h6>Overlay</h6>
               <div class="card-columns">
@@ -412,7 +448,11 @@
                 <div class="clearfix"></div>
               </div>
               <h6>Background</h6>
+<<<<<<< HEAD
 
+=======
+              
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
               <div class="card-columns">
                 <div class="card border border-primary p-1">
                   <img src="../images/morning.jpg" class="card-img img-hover cursor-pointer" onclick="changeBackground(this.src)">
@@ -508,12 +548,20 @@
                       <a href="http://gabrielecripezzi.com/academy/wp-content/uploads/2016/11/1wYVzIK1436862978036.jpg" class="text-secondary text small ml-2" target="_blank">View Image Source</a>
                     </div>
                     <div class="clearfix"></div>
+<<<<<<< HEAD
                     <div class="card">
                       <img class="img-fluid card-img-top img-hover cursor-pointer" src="../images/templateImages/PNG/tree.png" onclick="insertImageToCanvas(this.src)" data-dismiss="modal">
                       <a href="https://i.pinimg.com/originals/b2/50/d8/b250d89ce23afc5f12c023e8e956a21b.png" class="text-secondary text small ml-2" target="_blank">View Image Source</a>
                     </div>
                     <div class="clearfix"></div>
                     <div class="card">
+=======
+                     <div class="card">
+                      <img class="img-fluid card-img-top img-hover cursor-pointer" src="../images/templateImages/PNG/tree.png" onclick="insertImageToCanvas(this.src)" data-dismiss="modal">
+                      <a href="https://i.pinimg.com/originals/b2/50/d8/b250d89ce23afc5f12c023e8e956a21b.png" class="text-secondary text small ml-2" target="_blank">View Image Source</a>
+                    </div>
+                    <div class="clearfix"></div><div class="card">
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
                       <img class="img-fluid card-img-top img-hover cursor-pointer" src="../images/templateImages/PNG/game_of_thrones_png_logo_by_sohrabzia-d7y9g1j.png" onclick="insertImageToCanvas(this.src)" data-dismiss="modal">
                       <a href="https://orig00.deviantart.net/1bf2/f/2014/250/0/4/game_of_thrones_png_logo_by_sohrabzia-d7y9g1j.png" class="text-secondary text small ml-2" target="_blank">View Image Source</a>
                     </div>

@@ -97,8 +97,11 @@
           });
         }
       });
+<<<<<<< HEAD
       
       $("[data-toggle='tooltip']").tooltip("show");
+=======
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
     });
 
   </script>
@@ -149,9 +152,15 @@
             </p>
           </div>
           <div class="col-12 col-xl-5 col-lg-5 col-sm-12">
+<<<<<<< HEAD
                       <img class="img-fluid rounded h-0 w-35 rounded" src="../images/showroom.jpg" alt="AdamArc Showroom">
 <!--            <div id="map" class="h-100 w-100" style="background:url('../images/showroom.jpg') no-repeat"></div>-->
 <!--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d964.1710430713202!2d120.84262909987868!3d14.842973216212599!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x3f29937361d918db!2sAdam+Arc!5e0!3m2!1sen!2sph!4v1522389358030" width="500" height="500" frameborder="0" style="border:0" allowfullscreen></iframe>-->
+=======
+            <!--          <img class="img-fluid rounded h-0 w-35 rounded" src="../images/showroom.jpg" alt="AdamArc Showroom">-->
+<!--            <div id="map" class="h-100 w-100" style="background:url('../images/showroom.jpg') no-repeat"></div>-->
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d964.1710430713202!2d120.84262909987868!3d14.842973216212599!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x3f29937361d918db!2sAdam+Arc!5e0!3m2!1sen!2sph!4v1522389358030" width="500" height="500" frameborder="0" style="border:0" allowfullscreen></iframe>
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
           </div>
         </div>
       </div>
@@ -249,7 +258,11 @@
         });
         marker.setMap(map);
 var infowindow = new google.maps.InfoWindow({
+<<<<<<< HEAD
     content: "<div class='container'><div class='row'><div class='col-8 text-center mt-3'><strong>Adam <i class='text-danger'>A</i><i class='text-warning'>r</i><i class='text-primary'>c</i></strong><br>Blinds & Décor</div><div class='col-4'><img class='img-fluid'width='50' height='50' src='../images/showroom.jpg' alt='AdamArc Showroom'></div></div></div>"
+=======
+    content: "<div class='container'><div class='row'><div class='col-8 text-center mt-3'><strong>Adam <i class='text-danger'>A</i><i class='text-warning'>r</i><i class='text-primary'>c</i></strong><br>Blinds & Décor</div><div class='col-4'><img class='img-fluid rounded'width='50' height='50' src='../images/showroom.jpg' alt='AdamArc Showroom'></div></div></div>"
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
   });
   infowindow.open(map,marker);
       }

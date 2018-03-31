@@ -509,10 +509,13 @@
     ** OTHER FUNCTIONS
     */
 
+<<<<<<< HEAD
    $('#customization-tutorial').on('hide.bs.modal', function (e) {
      $("#video").get(0).pause();
    });
 
+=======
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
    $("#modalSummaryOrder").on("show.bs.modal", function (event) {
      canvas.discardActiveObject();
      canvas.renderAll();
@@ -1086,10 +1089,17 @@
    msg("Blinds ID: " + summary.blindsCode);
    msg("Fabric ID: " + summary.fabricCode);
    msg("isCustomize");
+<<<<<<< HEAD
    msg("Quantity: " + $("#summary-quantity").val());
    msg("Width: " + convertUnit($("#cloth-width").val(), $("#width-unit").val(), "cm").toFixed());
    msg("Height: " + convertUnit($("#cloth-height").val(), $("#height-unit").val(), "cm").toFixed());
    msg("Date now: " + $.now());
+=======
+   msg("Quantity: "+$("#summary-quantity").val());
+   msg("Width: "+convertUnit($("#cloth-width").val(), $("#width-unit").val(), "cm").toFixed());
+   msg("Height: "+convertUnit($("#cloth-height").val(), $("#height-unit").val(), "cm").toFixed());
+   msg("Date now: "+$.now());
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
    var preview = canvas.toDataURL('jpg');
    msg("Preview: " + preview);
  }
@@ -1211,7 +1221,11 @@
            obj.set({
              selectable: false,
            });
+<<<<<<< HEAD
          } else {
+=======
+         }else{
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
            objTop.push(obj.top)
            obj.animate('top', obj.top - 240, {
              duration: 3000,
@@ -1358,6 +1372,7 @@
  function msg(content) {
    console.log(content);
  }
+<<<<<<< HEAD
 
 document.getElementById('shareToFacebook').onclick = function() {
   FB.ui({
@@ -1366,3 +1381,5 @@ document.getElementById('shareToFacebook').onclick = function() {
     href: 'https://developers.facebook.com/docs/',
   }, function(response){});
 }
+=======
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
