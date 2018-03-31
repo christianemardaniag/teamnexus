@@ -1,47 +1,58 @@
 <div class="jumbotron bg-dark mt-5 mb-0" style="border-radius: 0;">
   <div class="row">
     <div class="col-xl-4 col-lg-4 col-md-6 text-center text-light">
-      <h3>Adam Arc</h3>
-      <h5>Blinds and Decor</h5>
-      <p class="text-muted font-italic">We supply, customize and install premium quality of window blinds from Korea.</p>
+      <h3>Adam <i class="text-danger">A</i><i class="text-warning">r</i><i class="text-primary">c</i></h3>
+      <h5>Blinds and Décor</h5>
+      <p class="text-muted font-italic">We supply, customize and install premium quality of window blinds from Korea</p>
+    </div>
+    <div class="col-xl-2 col-lg-2 col-md-6">
+      <h5 class="text-light text-center text-lg-left">View</h5>
+      <div class="container">
+        <div class="row">
+          <a href="../pages/home.php" class="text-light text-center text-lg-left pl-2 col-lg-12 col-sm-6">Home</a><br>
+      <a href="../pages/customization.php" class="text-light text-center text-lg-left pl-2 col-lg-12 col-sm-6">Customization</a><br>
+      <a href="../pages/catalogue.php" class="text-light text-center text-lg-left pl-2 col-lg-12 col-sm-6">Catalogue</a><br>
+      <a href="../pages/gallery.php" class="text-light text-center text-lg-left pl-2 col-lg-12 col-sm-6">Gallery</a><br>
+      <a href="../pages/about.php" class="text-light text-center text-lg-left pl-2 col-lg-12 col-sm-6">About</a>
+        </div>
+      </div>
+      
     </div>
     <div class="col-xl-3 col-lg-3 col-md-6 text-center text-xl-left text-lg-left">
       <h5 class="text-light">Contact us</h5>
       <h6 class="text-light">Contact Number : <span class="font-weight-normal">+63 917 5816868</span></h6>
       <h6 class="text-light">Email Address : <a href="mailto:adamarc_bd@yahoo.com" class="text-info">adamarc_bd@yahoo.com</a></h6>
-      <button class="btn btn-sm btn-outline-warning" type="button"><span class="fa fa-comments"></span> Send Feedback</button>
+      <button class="btn btn-sm btn-outline-warning" type="button" onclick="window.open('about.php#feedback-page', '_self')"><span class="fa fa-comments"></span> Send Feedback</button>
+      <div class="fb-like mt-2" data-href="https://www.facebook.com/adamarc.bd/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
     </div>
-    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 text-light">
-      <div class="row">
-        <div class="col-xl-7 col-lg-7 col-md-6 col-sm-12 text-center text-xl-left text-lg-left">
-          <h5>Visit us</h5>
-          <p><span class="fa fa-map-marker"></span> Unit 3 VCA Commercial Bldg. McArthur Hi-way, San Pablo Malolos, Bulacan, Philippines</p>
-        </div>
-        <div id="map" class="col-xl-5 col-lg-5 col-md-6 w-100" style="width:150px;height:150px;background-color:#333;"></div>
+    <div class="col-xl-3 col-lg-3 col-md-6 text-light">
+      <div class=" text-center text-xl-left text-lg-left">
+        <h5>Visit us</h5>
+        <p><span class="fa fa-map-marker"></span> <a href="https://goo.gl/maps/bdGtEpwCA7t" target="_blank" data-toggle="tooltip" title="View on Google Maps" data-placement="top" class="text-light">Unit 3 VCA Commercial Bldg. McArthur Hi-way, San Pablo, City of Malolos, Bulacan, Philippines</a></p>
       </div>
+      <div id="google_translate_element"></div>
     </div>
   </div>
   <hr>
-  <p class="text-center text-light my-0">&copy; 2018 <a href="#" class="text-warning font-weight-bold">Team Nexus</a> - All Right Reserved</p>
-
+  <p class="text-center text-light my-0">&copy; 2018 <a href="../pages/about.php" class="text-warning font-weight-bold">Adam Arc Blinds &amp; Décor</a> - All Right Reserved</p>
+  <div id="fb-root"></div>
+  
 </div>
-<script>
-  function myMap() {
-    var myCenter = new google.maps.LatLng(14.843004, 120.8432648);
-    var mapCanvas = document.getElementById("map");
-    var mapOptions = {
-      center: myCenter,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      zoom: 11
-    };
-    var map = new google.maps.Map(mapCanvas, mapOptions);
-    var marker = new google.maps.Marker({
-      position: myCenter,
-      animation: google.maps.Animation.BOUNCE
-    });
-    marker.setMap(map);
 
-  }
-
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrEPqVX5l9VGkb8ZP96wWjKTwWLRsRREs&callback=myMap"></script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
