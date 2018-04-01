@@ -19,8 +19,11 @@
 			$newimg = mysqli_escape_string($this->dbInfo->con, file_get_contents($blobImg));
 			return $newimg;
 		}
+<<<<<<< HEAD
       
       
+=======
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
 		
 		public function getBlob($img)
 		{

@@ -1,5 +1,6 @@
 <?php
     
+<<<<<<< HEAD
     require_once("DatabaseInfo.php");
     class DatabaseQuery
     {
@@ -27,12 +28,34 @@
 		}
 		
 		public function getBlob($img)
+=======
+    include_once("DatabaseInfo.php");
+    class DatabaseQuery
+    {
+        private $dbInfo;
+       
+        
+        function __construct(DatabaseInfo $di)
+        {
+            $this->dbInfo = $di;
+            
+        }
+        public function query($sql)
+        { 
+            return mysqli_query($this->dbInfo->con,$sql);
+            
+                
+        }
+        
+        public function getBlob($img)
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
 		{
 			$parseImg = "data:image/jpeg;base64,".base64_encode($img);
 			
 			return $parseImg; 
 		}
       
+<<<<<<< HEAD
         public function sendEmail($email, $subject, $message)
         {
 					
@@ -66,4 +89,14 @@
 
       }
     }
+=======
+      
+      
+        
+      
+      
+        
+    }
+
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
 ?>

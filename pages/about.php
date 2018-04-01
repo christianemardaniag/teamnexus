@@ -97,8 +97,16 @@
           });
         }
       });
+<<<<<<< HEAD
       
       $("[data-toggle='tooltip']").tooltip("show");
+=======
+<<<<<<< HEAD
+      
+      $("[data-toggle='tooltip']").tooltip("show");
+=======
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
     });
 
   </script>
@@ -135,7 +143,10 @@
           </div>
         </div>
       </div>
+<<<<<<< HEAD
       
+=======
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
 
     </div>
     <section id="move-here"></section>
@@ -147,6 +158,7 @@
             <h3 class="mt-5">Adam <i class="text-danger">A</i><i class="text-warning">r</i><i class="text-primary">c</i> Blinds &amp; Décor</h3>
             <p class="text-left lead pl-3">
               <br/> The <b>Adam <i class="text-danger">A</i><i class="text-warning">r</i><i class="text-primary">c</i> Blinds &amp; Décor</b> firm is primarily located at <b><a href="https://goo.gl/maps/bdGtEpwCA7t" target="_blank" data-toggle="tooltip" title="View on Google Maps" data-placement="left">Unit 3 VCA Commercial Bldg. McArthur Hi-way, San Pablo, Malolos, Bulacan</a></b>, nearby the road which makes it noticeable. Almost every vehicles passing the road can easily recognize the firm, which is an advantage to every business and can come up in an increase in number of customers. It conforms to every business ideals which is a location that accessible to everyone. The firms also provides a parking lot for all of its customers or inquirers so that customers will not be bother about their vehicle’s condition while they are still having conversation inside the firm. In the year (2015) AdamArc opens to public and start to offer their imported and high quality products.<br/><br/>
+<<<<<<< HEAD
               
             </p>
             
@@ -156,6 +168,20 @@
                       <img class="img-fluid rounded h-0 rounded" src="../images/showroom.jpg" alt="AdamArc Showroom">
 <!--            <div id="map" class="h-100 w-100" style="background:url('../images/showroom.jpg') no-repeat"></div>-->
 <!--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d964.1710430713202!2d120.84262909987868!3d14.842973216212599!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x3f29937361d918db!2sAdam+Arc!5e0!3m2!1sen!2sph!4v1522389358030" width="500" height="500" frameborder="0" style="border:0" allowfullscreen></iframe>-->
+=======
+            </p>
+          </div>
+          <div class="col-12 col-xl-5 col-lg-5 col-sm-12">
+<<<<<<< HEAD
+                      <img class="img-fluid rounded h-0 w-35 rounded" src="../images/showroom.jpg" alt="AdamArc Showroom">
+<!--            <div id="map" class="h-100 w-100" style="background:url('../images/showroom.jpg') no-repeat"></div>-->
+<!--<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d964.1710430713202!2d120.84262909987868!3d14.842973216212599!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x3f29937361d918db!2sAdam+Arc!5e0!3m2!1sen!2sph!4v1522389358030" width="500" height="500" frameborder="0" style="border:0" allowfullscreen></iframe>-->
+=======
+            <!--          <img class="img-fluid rounded h-0 w-35 rounded" src="../images/showroom.jpg" alt="AdamArc Showroom">-->
+<!--            <div id="map" class="h-100 w-100" style="background:url('../images/showroom.jpg') no-repeat"></div>-->
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d964.1710430713202!2d120.84262909987868!3d14.842973216212599!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x3f29937361d918db!2sAdam+Arc!5e0!3m2!1sen!2sph!4v1522389358030" width="500" height="500" frameborder="0" style="border:0" allowfullscreen></iframe>
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
           </div>
         </div>
       </div>
@@ -224,10 +250,17 @@
               </div>
             </div>
           </form>
+<<<<<<< HEAD
         </div>
         <div class="col-sm-6">
           <img src="../images/feedback.png" class="img-fluid">
         </div>
+=======
+        </div>
+        <div class="col-sm-6">
+          <img src="../images/feedback.png" class="img-fluid">
+        </div>
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
       </div>
 
     </div>
@@ -253,7 +286,15 @@
         });
         marker.setMap(map);
 var infowindow = new google.maps.InfoWindow({
+<<<<<<< HEAD
     content: "<div class='container'><div class='row'><div class='col-8 text-center mt-3'><strong>Adam <i class='text-danger'>A</i><i class='text-warning'>r</i><i class='text-primary'>c</i></strong><br>Blinds & Décor</div><div class='col-4'><img class='img-fluid'width='50' height='50' src='../images/showroom.jpg' alt='AdamArc Showroom'></div></div></div>"
+=======
+<<<<<<< HEAD
+    content: "<div class='container'><div class='row'><div class='col-8 text-center mt-3'><strong>Adam <i class='text-danger'>A</i><i class='text-warning'>r</i><i class='text-primary'>c</i></strong><br>Blinds & Décor</div><div class='col-4'><img class='img-fluid'width='50' height='50' src='../images/showroom.jpg' alt='AdamArc Showroom'></div></div></div>"
+=======
+    content: "<div class='container'><div class='row'><div class='col-8 text-center mt-3'><strong>Adam <i class='text-danger'>A</i><i class='text-warning'>r</i><i class='text-primary'>c</i></strong><br>Blinds & Décor</div><div class='col-4'><img class='img-fluid rounded'width='50' height='50' src='../images/showroom.jpg' alt='AdamArc Showroom'></div></div></div>"
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
   });
   infowindow.open(map,marker);
       }

@@ -23,7 +23,14 @@
       <h6 class="text-light">Contact Number : <span class="font-weight-normal">+63 917 5816868</span></h6>
       <h6 class="text-light">Email Address : <a href="mailto:adamarc_bd@yahoo.com" class="text-info">adamarc_bd@yahoo.com</a></h6>
       <button class="btn btn-sm btn-outline-warning" type="button" onclick="window.open('about.php#feedback-page', '_self')"><span class="fa fa-comments"></span> Send Feedback</button>
+<<<<<<< HEAD
       <div class="fb-like mt-2" data-href="https://www.facebook.com/adamarc.bd/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+=======
+<<<<<<< HEAD
+      <div class="fb-like mt-2" data-href="https://www.facebook.com/adamarc.bd/" data-layout="standard" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+=======
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
     </div>
     <div class="col-xl-3 col-lg-3 col-md-6 text-light">
       <div class=" text-center text-xl-left text-lg-left">
@@ -35,6 +42,7 @@
   </div>
   <hr>
   <p class="text-center text-light my-0">&copy; 2018 <a href="../pages/about.php" class="text-warning font-weight-bold">Adam Arc Blinds &amp; Décor</a> - All Right Reserved</p>
+<<<<<<< HEAD
   <div id="fb-root"></div>
   
 </div>
@@ -68,3 +76,31 @@ function googleTranslateElementInit() {
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 </script>
+=======
+<<<<<<< HEAD
+  <div id="fb-root"></div>
+  
+</div>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+
+
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+=======
+
+</div>
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d

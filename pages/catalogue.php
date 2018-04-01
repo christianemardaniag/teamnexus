@@ -76,7 +76,15 @@
     echo "
     <form action='catalogueBlinds.php' method='POST'>"; echo "
       <div class='col-sm-6 col-lg-4 col-xl-4'>"; //
+<<<<<<< HEAD
 //        <!-- normal -->
+=======
+<<<<<<< HEAD
+//        <!-- normal -->
+=======
+        <!-- normal -->
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
         echo "
         <div class='ih-item circle effect3 left_to_right m-3'>
           <a href='catalogueBlinds.php?catID=".$row[' blinds_category_id ']."'>
@@ -88,7 +96,15 @@
             </div>
           </a>
         </div>"; //
+<<<<<<< HEAD
 //        <!-- end normal -->
+=======
+<<<<<<< HEAD
+//        <!-- end normal -->
+=======
+        <!-- end normal -->
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
 
         echo "</div>"; echo "</form>"; } echo "</div>
     </div>"; ?> -->

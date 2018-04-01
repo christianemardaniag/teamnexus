@@ -49,6 +49,7 @@
         “Real Luxury is Customization”
         <span class="blockquote-footer">Lapo Elkann</span>
       </blockquote>
+<<<<<<< HEAD
       <button class="btn btn-warning" data-toggle="modal" data-target="#customization-tutorial" onclick="document.getElementById('video').play(); ">Watch Tutorial</button>
     </div>
     <div class="container">
@@ -126,6 +127,89 @@
 
             <!--            FABRIC TYPE     -->
             <div class="tab-pane fade" id="nav-fabric">
+=======
+<<<<<<< HEAD
+      <button class="btn btn-warning" data-toggle="modal" data-target="#customization-tutorial" onclick="document.getElementById('video').play(); ">Watch Tutorial</button>
+=======
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
+    </div>
+
+    <div class="container">
+
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-12">
+
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+              <button class="btn-link nav-item nav-link active" id="nav-blinds-tab" data-toggle="tab" href="#nav-blinds" role="tab" aria-controls="nav-blinds" aria-selected="true" onclick="step1()">Step 1</button>
+              <button class="btn-link nav-item nav-link" id="nav-fabric-tab" data-toggle="tab" href="#nav-fabric" role="tab" aria-controls="nav-fabric" aria-selected="false" onclick="step2()">Step 2</button>
+              <button class="btn-link nav-item nav-link" id="nav-properties-tab" data-toggle="tab" href="#nav-properties" role="tab" aria-controls="nav-properties" aria-selected="false" onclick="step3()">Step 3</button>
+              <button class="btn-link nav-item nav-link" id="nav-myContent-tab" data-toggle="tab" href="#nav-myContent" role="tab" onclick="step4()">Step 4</button>
+            </div>
+          </nav>
+
+          <!--        NOTE STEP 1-->
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-blinds" role="tabpanel" aria-labelledby="nav-blinds-tab">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-sm-8 pt-2">
+                    <div class="lead">Select Window Blinds</div>
+                  </div>
+                  <button class="col-sm-4 btn btn-link btn-sm" data-toggle="modal" data-target="#changeBackgroundModal"><i class="fas fa-image"></i> Change Backround</button>
+                </div>
+              </div>
+
+              <div class="container mt-4 overflow-y-lg">
+                <div class="card-columns card-columns-2">
+                  <?php
+                  include("../classes/DatabaseQuery.php");
+                  $dbQ = new DatabaseQuery(new DatabaseInfo);
+                  $getBlindsCat = "SELECT blinds_category_id, blinds_type_name, description, image, minwidth, minheight FROM `blinds_category` where status = 'available' and canCustomize = 'yes'";
+                  $allBlindsCat = $dbQ->query($getBlindsCat);
+                  while ($blindsRow = mysqli_fetch_array($allBlindsCat)){
+                    $flag = true;
+                    $id = $blindsRow["blinds_category_id"];
+                    $blindsType = $blindsRow["blinds_type_name"];
+                    $description = $blindsRow["description"];
+                    $image = $dbQ->getBlob($blindsRow["image"]);
+                    $minWidth = $blindsRow["minwidth"];
+                    $minHeight = $blindsRow["minheight"];
+                    echo "<div class='card border'><div class='carousel slide' data-ride='carousel'><div class='carousel-inner'>";    
+                    $getFabric = "SELECT fabric.fabric_name as 'fabName', fabric.fabric_image as 'fabImg', blinds.fabric_codeNo as 'fabCode', blinds.image as 'blindsImg' from fabric, blinds where blinds.blinds_category_id = $id and fabric.fabric_id = blinds.fabric_codeNo and blinds.status = 'available' limit 5";
+                    $allFabric = $dbQ->query($getFabric);
+                    while ($fabricRow = mysqli_fetch_array($allFabric)){
+                      $fabricImage = $dbQ->getBlob($fabricRow["fabImg"]);
+                      $fabricName = $fabricRow["fabName"];
+                      $fabricCode = $fabricRow["fabCode"];
+                      $blindsImg = $dbQ->getBlob($fabricRow["blindsImg"]);
+                      if($flag){
+                        echo "<div class='carousel-item active'>
+                              <img class='d-block w-100 cursor-pointer' src='$image' alt='$blindsType' style='object-fit: cover;' height='300px' onclick='changeShades(\"$blindsType\", $id, \"$fabricName\", \"$fabricImage\", \"$fabricCode\")'>
+                            </div>";
+                          $flag = false;
+                      } else {
+                        echo "<div class='carousel-item'>
+                              <img class='d-block w-100 cursor-pointer' src='$blindsImg' alt='$blindsType' style='object-fit: cover;' height='300px' onclick='changeShades(\"$blindsType\", $id, \"$fabricName\", \"$fabricImage\", \"$fabricCode\")'>
+                              </div>";
+                      }
+                    }
+                    
+                     echo "</div></div> <div class='card-body'>
+                      <h5 class='card-title'>$blindsType</h5>
+                      <p class='card-text text-truncate'>$description</p>
+                      <button type='button' class='btn btn-warning btn-sm btn-block' data-toggle='modal' data-target='#blindImageType'>See Details <i class='fas fa-angle-double-right'></i></button></div></div>
+                      <div class='clearfix'></div>";
+                  
+                  }
+                ?>
+                </div>
+              </div>
+            </div>
+
+            <!--            FABRIC TYPE     -->
+            <div class="tab-pane fade " id="nav-fabric" role="tabpanel" aria-labelledby="nav-fabric-tab">
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
               <div class="container-fluid">
                 <div class="row">
                   <p class="lead pt-2 col-sm-8">Change Fabric Type</p>
@@ -157,7 +241,11 @@
             </div>
 
             <!--          NOTE STEP 3-->
+<<<<<<< HEAD
             <div class="tab-pane fade show" id="nav-properties">
+=======
+            <div class="tab-pane fade show" id="nav-properties" role="tabpanel" aria-labelledby="nav-properties-tab">
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
               <div class="card">
                 <div class="card-header">Add Objects</div>
                 <div class="card-body d-flex flex-wrap">
@@ -250,13 +338,21 @@
         <div class="tab-pane fade" id="nav-myContent">
 
           <div class="container mt-4">
+<<<<<<< HEAD
             
+=======
+            <!--
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
             <div class="form-group row">
               <label for="template-name" class="col-sm-4 col-form-label">Template Name</label>
               <input id="template-name" type="text" class="col-sm-8 form-control" placeholder="My Favorite Design, e.g.">
             </div>
             <hr>
+<<<<<<< HEAD
 
+=======
+-->
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
             <div class="form-group row">
 
               <label class="col-sm-4 col-form-label">Dimension</label>
@@ -296,11 +392,73 @@
                 <input id="summary-quantity" type="number" class="form-control" min="1" value="1">
               </div>
               <button class="mx-auto mt-3 px-5 btn btn-sm btn-warning" data-target="#modalSummaryOrder" data-toggle="modal">Order</button>
+<<<<<<< HEAD
+=======
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="col-xl-6 col-lg-6 col-12 d-print-none">
+      <div class="btn-group" role="group">
+        <button id="btnZoomIn" type="button" class="btn btn-light" data-toggle="tooltip" data-html="true" title="Zoom In <br><kbd>Alt + Scroll Up</kbd>" data-placement="top"><i class="fas fa-search-plus"></i> <small class="d-none d-lg-inline">Zoom In</small></button>
+        <button id="btnZoomOut" type="button" class="btn btn-light" data-toggle="tooltip" data-html="true" title="Zoom Out <br><kbd>Alt + Scroll down</kbd>" data-placement="top"><i class="fas fa-search-minus"></i> <small class="d-none d-lg-inline">Zoom Out</small></button>
+<<<<<<< HEAD
+
+        <div class="btn-group-toggle" data-toggle="buttons">
+          <label id="btnPan" class="btn btn-light" data-toggle="tooltip" data-html="true" title="Move <br><kbd>Alt + Drag</kbd>" data-placement="top">
+    <input type="checkbox" autocomplete="off"><i class="fas fa-hand-paper"></i> <small class="d-none d-lg-inline">Move</small>
+  </label>
+        </div>
+        <button id="btnPreview" type="button" class="btn btn-light d-none" data-toggle="tooltip" data-html="true" title="Preview" onclick="preview()"><i class="fas fa-eye"></i> <small class="d-none d-lg-inline">Preview</small></button>
+        <button id="btn-reset" type="button" class="btn btn-light" data-toggle="popover" data-html="true" data-placement="bottom" title="Reset Design" data-content="Are you sure you want to reset your design?<div class='container'><div class='row'><button class='col btn btn-sm btn-info' onclick=cancelReset()>Cancel</button><button class='col btn btn-sm btn-link text-secondary text-muted' onclick=removeCloth()>Reset</button></div></div>"><i class="fas fa-sync"></i> <small class="d-none d-lg-inline">Reset</small></button>
+        <button type="button" class="btn btn-light" data-toggle="popover" data-html="true" title="Help" data-html="true" data-content="<ul><li></li></ul>"><i class="fas fa-help"></i> <small class="d-none d-lg-inline">Help</small></button>
+
+=======
+
+        <div class="btn-group-toggle" data-toggle="buttons">
+          <label id="btnPan" class="btn btn-light" data-toggle="tooltip" data-html="true" title="Move <br><kbd>Alt + Drag</kbd>" data-placement="top">
+    <input type="checkbox" autocomplete="off"><i class="fas fa-hand-paper"></i> <small class="d-none d-lg-inline">Move</small>
+  </label>
+        </div>
+        <button id="btnPreview" type="button" class="btn btn-light d-none" data-toggle="tooltip" data-html="true" title="Preview" onclick="preview()"><i class="fas fa-eye"></i> <small class="d-none d-lg-inline">Preview</small></button>
+        <button id="btn-reset" type="button" class="btn btn-light" data-toggle="popover" data-html="true" data-placement="bottom" title="Reset Design" data-content="Are you sure you want to reset your design?<div class='container'><div class='row'><button class='col btn btn-sm btn-info' onclick=cancelReset()>Cancel</button><button class='col btn btn-sm btn-link text-secondary text-muted' onclick=removeCloth()>Reset</button></div></div>"><i class="fas fa-sync"></i> <small class="d-none d-lg-inline">Reset</small></button>
+        <button type="button" class="btn btn-light" data-toggle="popover" data-html="true" title="Help" data-html="true" data-content="<ul><li></li></ul>"><i class="fas fa-help"></i> <small class="d-none d-lg-inline">Help</small></button>
+
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
+      </div>
+      <!--       NOTE CANVAS    -->
+
+      <div id="canvasSizer">
+        <canvas id="mainCanvas" class="mainCanvas" width="600" height="525" style="border: 1px solid #6c757d; border-radius: 4px;"></canvas>
+        <div class="btn-group position-absolute invisible" id="btnSetting">
+          <button id="btnDelete" class="btn btn-link btn-sm text-danger" type="button" data-toggle="tooltip" data-placement="top" data-html="true" data-delay='{"show":"500", "hide":"300"}' title="Remove (<kbd>Delete</kbd>)"><i class="far fa-trash-alt"></i></button>
+        </div>
+      </div>
+
+    </div>
+    </div>
+    <!--END OF ROW-->
+    </div>
+    <!--END OF CONTAINER-->
+
+    <!-- NOTE MODALS -->
+<<<<<<< HEAD
+    <div class="modal fade" id="customization-tutorial" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-body p-0">
+             <div class="embed-responsive embed-responsive-16by9">
+              <video id="video" class="embed-responsive-item" controls controlsList="nodownload">
+			<source src="../Customization%20Tutorial_Small.mp4" type='video/mp4'>
+		</video>
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<<<<<<< HEAD
     <div class="col-xl-6 col-lg-6 col-12 d-print-none">
       <div class="btn-group" role="group">
         <button id="btnZoomIn" type="button" class="btn btn-light" data-toggle="tooltip" data-html="true" title="Zoom In <br><kbd>Alt + Scroll Up</kbd>" data-placement="top"><i class="fas fa-search-plus"></i> <small class="d-none d-lg-inline">Zoom In</small></button>
@@ -344,6 +502,11 @@
       </div>
     </div>
 
+=======
+
+=======
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
 
     <div class="modal fade" id="modalSummaryOrder" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -376,8 +539,16 @@
           </div>
           <div class="modal-footer">
             <button class="btn btn-link text-secondary" data-dismiss="modal">Cancel</button>
+<<<<<<< HEAD
             <button id="shareToFacebook" class="btn btn-primary popover-test" title="Share to Facebook" data-content="Share your design to Facebook" data-placement="top"><i class="fab fa-facebook"></i> Share</button>
             <button id="btnOrder" class="btn btn-success" onclick="order()"><i class="d-none fas fa-spinner fa-pulse"></i> Finish</button>
+=======
+<<<<<<< HEAD
+            <button id="shareToFacebook" class="btn btn-primary">Share</button>
+=======
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
+            <button class="btn btn-success" onclick="order()">Continue</button>
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
           </div>
         </div>
       </div>
@@ -391,7 +562,25 @@
               <span aria-hidden="true">&times;</span></button>
           </div>
           <div class="modal-body">
+<<<<<<< HEAD
 
+=======
+
+<<<<<<< HEAD
+=======
+
+    <div class="modal fade" id="changeBackgroundModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Change Background</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
             <div class="container-fluid">
               <h6>Overlay</h6>
               <div class="card-columns">
@@ -409,7 +598,15 @@
                 <div class="clearfix"></div>
               </div>
               <h6>Background</h6>
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+              
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
               <div class="card-columns">
                 <div class="card border border-primary p-1">
                   <img src="../images/morning.jpg" class="card-img img-hover cursor-pointer" onclick="changeBackground(this.src)">
@@ -473,6 +670,7 @@
                       <img class="img-fluid card-img-top img-hover cursor-pointer" src="../images/TemplateImages/Others/bBv3tZ.jpg" onclick="insertImageToCanvas(this.src)" data-dismiss="modal">
                       <a href="https://free4kwallpapers.com/" class="text-secondary text small ml-2" target="_blank">View Image Source</a>
                     </div>
+<<<<<<< HEAD
 
                     <div class="clearfix"></div>
                     <div class="card">
@@ -516,6 +714,59 @@
                     </div>
                     <div class="clearfix"></div>
 
+=======
+
+                    <div class="clearfix"></div>
+                    <div class="card">
+                      <img class="img-fluid card-img-top img-hover cursor-pointer" src="../images/templateImages/Animals images/white-tiger-bengal-tiger-wallpaper.jpg" onclick="insertImageToCanvas(this.src)" data-dismiss="modal">
+                      <a href="https://free4kwallpapers.com/" class="text-secondary text small ml-2" target="_blank">View Image Source</a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="card">
+                      <img class="img-fluid card-img-top img-hover cursor-pointer" src="../images/templateImages/PNG/happy-everyday.png" onclick="insertImageToCanvas(this.src)" data-dismiss="modal">
+                      <a href="https://www.freepik.com/free-vector/cute-background-of-smiling-cloud_1041386.htm" class="text-secondary text small ml-2" target="_blank">View Image Source</a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="card">
+                      <img class="img-fluid card-img-top img-hover cursor-pointer" src="../images/templateImages/Movies images/life-of-pi-boat-tiger-wallpaper.jpg" onclick="insertImageToCanvas(this.src)" data-dismiss="modal">
+                      <a href="https://free4kwallpapers.com/" class="text-secondary text small ml-2" target="_blank">View Image Source</a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="card">
+                      <img class="img-fluid card-img-top img-hover cursor-pointer" src="../images/templateImages/PNG/world_map.png" onclick="insertImageToCanvas(this.src)" data-dismiss="modal">
+                      <a href="http://chaimusic.us/-the-map-png.html" class="text-secondary text small ml-2" target="_blank">View Image Source</a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="card">
+                      <img class="img-fluid card-img-top img-hover cursor-pointer" src="../images/templateImages/PNG/cute-unicorn-card-and-poster-template_7096-454.png" onclick="insertImageToCanvas(this.src)" data-dismiss="modal">
+                      <a href="https://www.freepik.com/premium-vector/cute-unicorn-card-and-poster-template_1773786.htm#term=background poster&page=2&position=26" class="text-secondary text small ml-2" target="_blank">View Image Source</a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="card">
+                      <img class="img-fluid card-img-top img-hover cursor-pointer" src="../images/templateImages/PNG/O9FG4R0.jpg" onclick="insertImageToCanvas(this.src)" data-dismiss="modal">
+                      <a href="http://gabrielecripezzi.com/academy/wp-content/uploads/2016/11/1wYVzIK1436862978036.jpg" class="text-secondary text small ml-2" target="_blank">View Image Source</a>
+                    </div>
+                    <div class="clearfix"></div>
+<<<<<<< HEAD
+                    <div class="card">
+                      <img class="img-fluid card-img-top img-hover cursor-pointer" src="../images/templateImages/PNG/tree.png" onclick="insertImageToCanvas(this.src)" data-dismiss="modal">
+                      <a href="https://i.pinimg.com/originals/b2/50/d8/b250d89ce23afc5f12c023e8e956a21b.png" class="text-secondary text small ml-2" target="_blank">View Image Source</a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="card">
+=======
+                     <div class="card">
+                      <img class="img-fluid card-img-top img-hover cursor-pointer" src="../images/templateImages/PNG/tree.png" onclick="insertImageToCanvas(this.src)" data-dismiss="modal">
+                      <a href="https://i.pinimg.com/originals/b2/50/d8/b250d89ce23afc5f12c023e8e956a21b.png" class="text-secondary text small ml-2" target="_blank">View Image Source</a>
+                    </div>
+                    <div class="clearfix"></div><div class="card">
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
+                      <img class="img-fluid card-img-top img-hover cursor-pointer" src="../images/templateImages/PNG/game_of_thrones_png_logo_by_sohrabzia-d7y9g1j.png" onclick="insertImageToCanvas(this.src)" data-dismiss="modal">
+                      <a href="https://orig00.deviantart.net/1bf2/f/2014/250/0/4/game_of_thrones_png_logo_by_sohrabzia-d7y9g1j.png" class="text-secondary text small ml-2" target="_blank">View Image Source</a>
+                    </div>
+                    <div class="clearfix"></div>
+
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
                   </div>
                 </div>
                 <div id="zoom-container" class="col-sm-4">

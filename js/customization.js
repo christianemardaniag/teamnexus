@@ -11,7 +11,11 @@
  });
 
  var combi = new fabric.Rect({
+<<<<<<< HEAD
    width: 400,
+=======
+   width: 800,
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
    id: "cloth",
    height: 20,
    top: 50,
@@ -109,7 +113,10 @@
      responsive: true,
      scrollZoom: true,
    });
+<<<<<<< HEAD
 
+=======
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
 
    /*
     **  CANVAS PROPERTIES
@@ -174,6 +181,25 @@
 
 
 
+<<<<<<< HEAD
+=======
+   canvas.on('mouse:wheel', function (event) {
+     if (event.e.deltaY > 0 && event.e.altKey && zoomLevel > 0) {
+       canvas.setZoom(canvas.getZoom() / 1.1);
+       zoomLevel--;
+       event.e.preventDefault();
+       event.e.stopPropagation();
+       limitPanningArea(this)
+
+     } else if (event.e.deltaY < 0 && event.e.altKey && zoomLevel <= 10) {
+       canvas.setZoom(canvas.getZoom() * 1.1);
+       zoomLevel++;
+       event.e.preventDefault();
+       event.e.stopPropagation();
+       limitPanningArea(this)
+     }
+   });
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
 
 
 
@@ -188,6 +214,7 @@
    })
    canvas.on('selection:cleared', function () {
      $("#object-properties").addClass("collapse");
+<<<<<<< HEAD
      clipRect1.set({
        selectable: false
      });
@@ -196,6 +223,16 @@
 
    canvas.on('object:selected', function (e) {
      $("#btnDelete").removeClass("d-none");
+=======
+     var dataURL = canvas.toDataURL('jpg');
+     $("#preview-image").attr("src", dataURL);
+     $("#btnSetting").addClass("invisible");
+     sendClothToBack();
+   })
+
+   canvas.on('object:selected', function (e) {
+     addDeleteBtn((e.target.oCoords.tr.x), e.target.oCoords.tr.y);
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
      e.target.set({
        cornerStyle: 'circle',
        borderColor: '#17a2b8',
@@ -208,6 +245,7 @@
      activeObject = canvas.getActiveObject();
      if (activeObject) {
        $("#object-properties").removeClass("collapse");
+<<<<<<< HEAD
        $("#properties-color").removeClass("collapse");
        $("#properties-opacity").removeClass("collapse");
        $("#properties-layer").removeClass("collapse");
@@ -220,6 +258,32 @@
          $("#properties-color").addClass("collapse");
          $("#properties-font").addClass("collapse");
          $("#properties-font-size").addClass("collapse");
+=======
+       if (activeObject.id.indexOf("cloth")) {
+         $("#range-opacity").val(activeObject.get("opacity") * 100);
+         $("#number-opacity").val(activeObject.get("opacity") * 100);
+
+         if (activeObject.isType('textbox')) {
+           $("#properties-color").removeClass("collapse");
+           $("#properties-opacity").removeClass("collapse");
+           $("#properties-layer").removeClass("collapse");
+           $("#font-size").val(activeObject.get("fontSize"));
+           $("#font-family").val(activeObject.get("fontFamily"));
+           $("#properties-font").removeClass("collapse");
+           $("#properties-font-size").removeClass("collapse");
+
+         } else if (activeObject.isType('image')) {
+           $("#properties-color").addClass("collapse");
+
+         } else {
+           $("#properties-color").removeClass("collapse");
+
+           $("#properties-opacity").removeClass("collapse");
+           $("#properties-layer").removeClass("collapse");
+           $("#properties-font").addClass("collapse");
+           $("#properties-font-size").addClass("collapse");
+         }
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
        } else {
          $("#properties-color").removeClass("collapse");
          $("#properties-opacity").removeClass("collapse");
@@ -230,6 +294,7 @@
      }
    });
    canvas.on('object:modified', function (e) {
+<<<<<<< HEAD
      sendClothToBack();
    });
    canvas.on('mouse:wheel', function (event) {
@@ -266,8 +331,16 @@
        event.e.stopPropagation();
        limitPanningArea(this)
      }
+=======
+     //    activeObject = canvas.getActiveObject();
+     addDeleteBtn((e.target.oCoords.tr.x), e.target.oCoords.tr.y);
+     //        loadPattern(fabricType, activeObject, "blue");
+     var dataURL = canvas.toDataURL('jpg');
+     $("#preview-image").attr("src", dataURL);
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
    });
    canvas.on('mouse:down', function (e) {
+<<<<<<< HEAD
      var evt = e.e;
      if (evt.altKey) {
        this.isDragging = true;
@@ -304,6 +377,36 @@
 //       canvas.
        canvas.selection = true;
      }
+=======
+     if (!canvas.getActiveObject()) {
+       $('#btnDelete').tooltip('hide');
+       $("#btnSetting").addClass("invisible");
+     }
+     panning = true;
+     if (insertLine) {
+       isDown = true;
+       var pointer = canvas.getPointer(e.e);
+       var points = [pointer.x, pointer.y, pointer.x, pointer.y];
+       line = new fabric.Line(points, {
+         id: 'line',
+         strokeWidth: 3,
+         stroke: color[getRandomInt(0, colorEnd)],
+         //         perPixelTargetFind: true,
+         //         top: 100,
+         //         left: 230,
+         objectCaching: false,
+         //         lockScalingFlip: true,
+         originX: 'center',
+         originY: 'center',
+         clipName: 'clipObj',
+         clipTo: function (ctx) {
+           return _.bind(clipByName, line)(ctx)
+         }
+       });
+       canvas.add(line);
+
+     }
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
    });
    canvas.on("mouse:move", function (opt) {
      if (this.isDragging && (canvas.getZoom() > 1)) {
@@ -340,7 +443,47 @@
      $('#btnDelete').tooltip('hide');
      $("#btnSetting").addClass("invisible");
    });
+<<<<<<< HEAD
 
+=======
+   canvas.on('mouse:up', function (e) {
+     panning = false;
+     isDown = false;
+     if (insertLine) {
+       insertLine = false;
+       canvas.setActiveObject(line);
+       canvas.renderAll();
+       $("#mainCanvas").css("cursor", "auto");
+     }
+   });
+   canvas.on("mouse:move", function (e) {
+     if ((panning && e.e.altKey) || (panning && window.isPan)) {
+       msg("panning")
+       if (zoomLevel != 0) {
+
+         canvas.selection = false;
+         var delta = new fabric.Point(e.e.movementX, e.e.movementY);
+         canvas.relativePan(delta);
+         limitPanningArea(this);
+       }
+       $('#btnPan').find('[data-fa-i2svg]').toggleClass('fa-hand-rock');
+     } else {
+       canvas.selection = true;
+       $('#btnPan').find('[data-fa-i2svg]').toggleClass('fa-hand-paper');
+     }
+
+     if (insertLine) {
+
+       if (!isDown) return;
+       var pointer = canvas.getPointer(e.e);
+       line.set({
+         x2: pointer.x,
+         y2: pointer.y
+       });
+       canvas.renderAll();
+     }
+   })
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
 
    // END OF CANVAS OBJECT EVENTS
 
@@ -365,7 +508,22 @@
    /*
     ** CANVAS FUNCTIONS
     */
+<<<<<<< HEAD
 
+=======
+   //   loadCombi(fabricType, '#fff');
+
+   function addDeleteBtn(x, y) {
+     $("#btnSetting").addClass("invisible");
+     var btnLeft = x + 8,
+       btnTop = y + 5;
+     $("#btnSetting").css({
+       "top": btnTop + "px",
+       "left": btnLeft + "px"
+     });
+     $("#btnSetting").toggleClass("invisible");
+   }
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
    // NOTE INSERT OBJECT
    $("#btnText").click(function () {
      var text = new fabric.Textbox("text", {
@@ -376,12 +534,21 @@
        left: 230,
        textAlign: 'center',
        objectCaching: false,
+<<<<<<< HEAD
        originX: 'center',
        originY: 'center',
        clipName: 'clipObj',
        clipTo: function (ctx) {
          return _.bind(clipByName, text)(ctx)
        }
+=======
+       //       originX: 'center',
+       //       originY: 'center',
+       //       clipName: 'clipObj',
+       //       clipTo: function (ctx) {
+       //         return _.bind(clipByName, text)(ctx)
+       //       }
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
      });
      //     canvas.centerObject(text);
      canvas.fxAdd(text);
@@ -438,7 +605,11 @@
    });
    $("#btnLine").click(function () {
      insertLine = true;
+<<<<<<< HEAD
      canvas.selection = false;
+=======
+     $("#mainCanvas").css("cursor", "crosshair");
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
 
      //     var line = new fabric.Line([getRandomInt(50, 250), getRandomInt(50, 250), getRandomInt(50, 250), getRandomInt(50, 250)], {
      //       id: "line",
@@ -491,10 +662,19 @@
     ** OTHER FUNCTIONS
     */
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
    $('#customization-tutorial').on('hide.bs.modal', function (e) {
      $("#video").get(0).pause();
    });
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
    $("#modalSummaryOrder").on("show.bs.modal", function (event) {
      canvas.discardActiveObject();
      canvas.renderAll();
@@ -764,9 +944,15 @@
    fabric.Image.fromURL(path, function (img) {
      var scale = 1;
      var temp = img.width;
+<<<<<<< HEAD
      while (temp > combi.width) {
        temp = img.width;
        scale -= 0.3;
+=======
+     while (temp > roller.width) {
+       temp = img.width;
+       scale -= 0.1;
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
        temp *= scale;
      }
      img.set({
@@ -845,9 +1031,12 @@
    summary.fabric = fabricName;
    fabricType = fabricImg;
    summary.fabricCode = fabricCode;
+<<<<<<< HEAD
    $("#step2").removeAttr("disabled");
    $("#step3").removeAttr("disabled");
    $("#step4").removeAttr("disabled");
+=======
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
    if (canvas.getObjects().length == 0) {
      if (type == "Roller Shades") {
        $("#btnPreview").removeClass("d-none");
@@ -883,6 +1072,7 @@
    })
    canvas.add(roller)
    loadPattern(fabricType, roller, "white");
+<<<<<<< HEAD
  }
 
  function reset() {
@@ -907,9 +1097,12 @@
    $("#nav-properties").removeClass("active");
    $("#nav-myContent").removeClass("active");
    removeCloth();
+=======
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
  }
 
  function removeCloth() {
+   // FUTURE [x] SET SUMMARY.BLINDS = NULL
    canvas.clear();
    canvas.setOverlayImage(overlayImage,
      canvas.renderAll.bind(canvas), {
@@ -1106,6 +1299,7 @@
    return converted;
  }
 
+<<<<<<< HEAD
 function b64toBlob(b64Data, contentType, sliceSize) {
   contentType = contentType || '';
   sliceSize = sliceSize || 512;
@@ -1182,6 +1376,34 @@ var byteNumbers;
          selectable: false
        });
      }
+=======
+ function order() {
+   // FUTURE SAVE TEMPLATE TO JSON
+   msg("Blinds ID: " + summary.blindsCode);
+   msg("Fabric ID: " + summary.fabricCode);
+   msg("isCustomize");
+<<<<<<< HEAD
+   msg("Quantity: " + $("#summary-quantity").val());
+   msg("Width: " + convertUnit($("#cloth-width").val(), $("#width-unit").val(), "cm").toFixed());
+   msg("Height: " + convertUnit($("#cloth-height").val(), $("#height-unit").val(), "cm").toFixed());
+   msg("Date now: " + $.now());
+=======
+   msg("Quantity: "+$("#summary-quantity").val());
+   msg("Width: "+convertUnit($("#cloth-width").val(), $("#width-unit").val(), "cm").toFixed());
+   msg("Height: "+convertUnit($("#cloth-height").val(), $("#height-unit").val(), "cm").toFixed());
+   msg("Date now: "+$.now());
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
+   var preview = canvas.toDataURL('jpg');
+   msg("Preview: " + preview);
+ }
+
+ function step1() {
+   $("#colorForFabric").append($("#inputFillColor").parent())
+   canvas.getObjects().forEach(function (obj) {
+     obj.set({
+       selectable: true
+     });
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
    });
  }
 
@@ -1199,6 +1421,7 @@ var byteNumbers;
 
  function step3() {
    $("#colorForObject").append($("#inputFillColor").parent());
+<<<<<<< HEAD
    canvas.getObjects().forEach(function (obj) {
      canvas.discardActiveObject();
      if (~obj.id.indexOf("cloth")) {
@@ -1207,6 +1430,8 @@ var byteNumbers;
        });
      }
    });
+=======
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
  }
 
  function step4() {
@@ -1230,6 +1455,7 @@ var byteNumbers;
 
  // DONE [x] Limit Panning Area
  function limitPanningArea(opt) {
+<<<<<<< HEAD
    var vpt = canvas.viewportTransform;
    if (zoom < 400 / 500) {
      canvas.viewportTransform[4] = 450 * zoom / 2;
@@ -1244,6 +1470,23 @@ var byteNumbers;
        canvas.viewportTransform[5] = 0;
      } else if (vpt[5] < canvas.getHeight() - 450 * zoom) {
        canvas.viewportTransform[5] = canvas.getHeight() - 450 * zoom;
+=======
+   var vpt = opt.viewportTransform;
+   var zoom = canvas.getZoom();
+   if (zoom < 400 / 1000) {
+     opt.viewportTransform[4] = 400 - 1000 * zoom / 2;
+     opt.viewportTransform[5] = 400 - 1000 * zoom / 2;
+   } else {
+     if (vpt[4] >= 0) {
+       opt.viewportTransform[4] = 0;
+     } else if (vpt[4] < canvas.getWidth() - 490 * zoom) {
+       opt.viewportTransform[4] = canvas.getWidth() - 490 * zoom;
+     }
+     if (vpt[5] >= 0) {
+       opt.viewportTransform[5] = 0;
+     } else if (vpt[5] < canvas.getHeight() - 490 * zoom) {
+       opt.viewportTransform[5] = canvas.getHeight() - 500 * zoom;
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
      }
    }
  }
@@ -1300,7 +1543,15 @@ var byteNumbers;
            obj.set({
              selectable: false,
            });
+<<<<<<< HEAD
          } else {
+=======
+<<<<<<< HEAD
+         } else {
+=======
+         }else{
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
            objTop.push(obj.top)
            obj.animate('top', obj.top - 240, {
              duration: 3000,
@@ -1447,6 +1698,7 @@ var byteNumbers;
  function msg(content) {
    console.log(content);
  }
+<<<<<<< HEAD
 
  document.getElementById('shareToFacebook').onclick = function () {
    FB.ui({
@@ -1455,3 +1707,16 @@ var byteNumbers;
      href: canvas.toDataURL('jpg'),
    }, function (response) {});
  }
+=======
+<<<<<<< HEAD
+
+document.getElementById('shareToFacebook').onclick = function() {
+  FB.ui({
+    method: 'share',
+    display: 'popup',
+    href: 'https://developers.facebook.com/docs/',
+  }, function(response){});
+}
+=======
+>>>>>>> dc5e28cec6896b9f09726c9535a6fa939f57b9ee
+>>>>>>> 544b1522ec6a545ee52d7b4d45dbd39494060a3d
